@@ -14,12 +14,14 @@ suspend fun <T> suspendTransaction(block: Transaction.() -> T): T =
     newSuspendedTransaction(Dispatchers.IO, statement = block)
 
 const val SCHEMA_NAME = "nc_admin"
+const val USER = "root"
+const val PASSWORD = ""
 
 fun connectDBServer(schema: String = "") = Database.connect(
     url = "jdbc:mysql://localhost:3306/$schema",
     driver = "com.mysql.cj.jdbc.Driver",
-    user = "root",
-    password = "",
+    user = USER,
+    password = PASSWORD,
 )
 
 suspend fun createSchema() {
