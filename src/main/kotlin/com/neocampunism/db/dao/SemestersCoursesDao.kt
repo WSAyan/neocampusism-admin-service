@@ -11,13 +11,12 @@ import org.jetbrains.exposed.dao.id.EntityID
 class SemestersCoursesDao(id: EntityID<Int>) : IntEntity(id) {
     companion object : IntEntityClass<SemestersCoursesDao>(SemestersCourses)
 
-    var semesterCourseID by Semesters.semesterID
-    var semesterID by Semesters.semesterID
-    var courseID by Courses.courseID
+    var semesterID by SemestersCourses.semesterID
+    var courseID by SemestersCourses.courseID
 }
 
 fun daoToModel(dao: SemestersCoursesDao) = SemesterCourse(
-    semesterID = dao.semesterID,
-    semesterCourseID = dao.semesterCourseID,
-    courseID = dao.courseID,
+    semesterID = dao.semesterID.value,
+    semesterCourseID = dao.id.value,
+    courseID = dao.courseID.value,
 )

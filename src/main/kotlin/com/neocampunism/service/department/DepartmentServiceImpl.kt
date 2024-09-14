@@ -3,6 +3,7 @@ package com.neocampunism.service.department
 import com.neocampunism.model.Department
 import com.neocampunism.repository.department.DepartmentRepository
 import com.neocampunism.response.ApiResponse
+import kotlinx.serialization.Serializable
 
 class DepartmentServiceImpl(private val departmentRepository: DepartmentRepository) : DepartmentService {
 
@@ -49,7 +50,7 @@ class DepartmentServiceImpl(private val departmentRepository: DepartmentReposito
         return ApiResponse(status = "success", message = "Department updated", data = updatedDepartment)
     }
 
-    override suspend fun deleteDepartment(id: Int): ApiResponse<Any> {
+    override suspend fun deleteDepartment(id: Int): ApiResponse<Department> {
         return if (departmentRepository.deleteDepartment(id)) {
             ApiResponse(status = "success", message = "Department deleted")
         } else {

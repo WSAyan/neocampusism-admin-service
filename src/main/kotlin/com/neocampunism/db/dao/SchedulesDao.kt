@@ -8,15 +8,15 @@ import org.jetbrains.exposed.dao.id.EntityID
 
 class SchedulesDao(id: EntityID<Int>) : IntEntity(id) {
     companion object : IntEntityClass<SchedulesDao>(Schedules)
-    var scheduleID by Schedules.scheduleID
+
     var courseID by Schedules.courseID
     var timeSlotID by Schedules.timeSlotID
     var roomID by Schedules.roomID
 }
 
 fun daoToModel(dao: SchedulesDao) = Schedule(
-    scheduleID = dao.scheduleID,
-    courseID = dao.courseID,
-    timeSlotID = dao.timeSlotID,
-    roomID = dao.roomID,
+    scheduleID = dao.id.value,
+    courseID = dao.courseID.value,
+    timeSlotID = dao.timeSlotID.value,
+    roomID = dao.roomID.value,
 )

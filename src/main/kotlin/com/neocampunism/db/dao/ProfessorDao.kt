@@ -9,7 +9,6 @@ import org.jetbrains.exposed.dao.id.EntityID
 class ProfessorDao(id: EntityID<Int>) : IntEntity(id) {
     companion object : IntEntityClass<ProfessorDao>(Professors)
 
-    var professorId by Professors.professorID
     var firstName by Professors.firstName
     var lastName by Professors.lastName
     var shortName by Professors.shortName
@@ -18,10 +17,10 @@ class ProfessorDao(id: EntityID<Int>) : IntEntity(id) {
 }
 
 fun daoToModel(dao: ProfessorDao) =  Professor(
-    professorID = dao.professorId,
+    professorID = dao.id.value,
     firstName = dao.firstName,
     lastName = dao.lastName,
     shortName = dao.shortName,
-    departmentID = dao.departmentID,
+    departmentID = dao.departmentID?.value,
     email = dao.email,
 )

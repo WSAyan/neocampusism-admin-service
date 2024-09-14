@@ -8,7 +8,6 @@ import org.jetbrains.exposed.dao.id.EntityID
 
 class CourseDao(id: EntityID<Int>) : IntEntity(id) {
     companion object : IntEntityClass<CourseDao>(Courses)
-    var courseId by Courses.courseID
     var courseName by Courses.courseName
     var courseCode by Courses.courseCode
     var departmentID by Courses.departmentID
@@ -17,9 +16,10 @@ class CourseDao(id: EntityID<Int>) : IntEntity(id) {
 }
 
 fun daoToModel(dao: CourseDao) = Course(
-    courseID = dao.courseId,
+    courseID = dao.id.value,
     courseName = dao.courseName,
     courseCode = dao.courseCode,
-    departmentID = dao.departmentID,
+    departmentID = dao.departmentID?.value,
     credits = dao.credits,
+    courseType = com.neocampunism.model.CourseType.valueOf(dao.courseType.name)
 )

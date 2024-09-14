@@ -34,13 +34,8 @@ class FakeDepartmentRepository : DepartmentRepository {
         return departments.find { it.departmentID == id }
     }
 
-    override suspend fun updateDepartment(id: Int, department: Department): Boolean {
-        val index = departments.indexOfFirst { it.departmentID == id }
-        if (index != -1) {
-            departments[index] = department.copy(departmentID = id)
-            return true
-        }
-        return false
+    override suspend fun updateDepartment(id: Int, department: Department): Department? {
+        return departments.find { it.departmentID == id }
     }
 
     override suspend fun deleteDepartment(id: Int): Boolean {

@@ -29,7 +29,7 @@ class DepartmentRepositoryImpl : DepartmentRepository {
     override suspend fun getDepartmentById(id: Int): Department? = suspendTransaction {
         DepartmentDao
             .find {
-                Departments.departmentID eq id
+                Departments.id eq id
             }
             .map(::daoToModel)
             .firstOrNull()
@@ -40,7 +40,7 @@ class DepartmentRepositoryImpl : DepartmentRepository {
 
         department.departmentCode ?: return@suspendTransaction null
 
-        val updatedDepartment = DepartmentDao.findSingleByAndUpdate(Departments.departmentID eq id) {
+        val updatedDepartment = DepartmentDao.findSingleByAndUpdate(Departments.id eq id) {
             it.departmentName = department.departmentName
             it.departmentCode = department.departmentCode
         } ?: return@suspendTransaction null
@@ -49,6 +49,6 @@ class DepartmentRepositoryImpl : DepartmentRepository {
     }
 
     override suspend fun deleteDepartment(id: Int): Boolean = suspendTransaction {
-        Departments.deleteWhere { departmentID eq id } == 1
+        Departments.deleteWhere { Departments.id eq id } == 1
     }
 }

@@ -48,6 +48,7 @@ fun Route.departmentRoutes(departmentService: DepartmentService) {
                 HttpStatusCode.BadRequest,
                 ApiResponse<Any>(status = "failed", message = "Invalid department ID")
             )
+
             val response = departmentService.deleteDepartment(id)
             call.respond(HttpStatusCode.OK, response)
         }
