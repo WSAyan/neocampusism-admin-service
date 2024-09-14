@@ -1,6 +1,7 @@
 package com.neocampunism.plugins
 
 import com.neocampunism.repository.course.FakeCourseRepository
+import com.neocampunism.repository.department.DepartmentRepositoryImpl
 import com.neocampunism.repository.department.FakeDepartmentRepository
 import com.neocampunism.repository.professor.FakeProfessorRepository
 import com.neocampunism.repository.room.FakeRoomRepository
@@ -68,7 +69,7 @@ fun Application.configureRouting() {
             swaggerUI(path = "swagger", swaggerFile = "openapi/documentation.yaml")
         }
 
-        departmentRoutes(DepartmentServiceImpl(FakeDepartmentRepository()))
+        departmentRoutes(DepartmentServiceImpl(DepartmentRepositoryImpl()))
         professorRoutes(ProfessorServiceImpl(FakeProfessorRepository()))
         courseRoutes(CourseServiceImpl(FakeCourseRepository()))
         timeSlotRoutes(TimeSlotServiceImpl(FakeTimeSlotRepository()))

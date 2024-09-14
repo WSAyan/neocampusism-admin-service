@@ -20,9 +20,10 @@ class FakeDepartmentRepository : DepartmentRepository {
         )
     private var nextId = 1
 
-    override suspend fun addDepartment(department: Department): Boolean {
+    override suspend fun addDepartment(department: Department): Department? {
+        val newDepartment = department.copy(departmentID = nextId++)
         departments.add(department.copy(departmentID = nextId++))
-        return true
+        return newDepartment
     }
 
     override suspend fun getAllDepartments(): List<Department> {

@@ -70,7 +70,7 @@ enum class RoomType {
 
 object TimeSlots : IntIdTable("TimeSlots") {
     val timeSlotID = integer("TimeSlotID").autoIncrement().index()
-    val dayOfWeek = enumerationByName("DayOfWeek", 10, DayOfWeek::class)
+    val dayOfWeek = enumerationByName("DayOfWeek", 7, DayOfWeek::class)
     val startTime = time("StartTime")
     val endTime = time("EndTime")
 }
