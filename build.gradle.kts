@@ -1,6 +1,8 @@
 val kotlin_version: String by project
 val logback_version: String by project
 val ktor_version: String by project
+val mysql_version:String by project
+val exposed_version: String by project
 
 plugins {
     kotlin("jvm") version "2.0.20"
@@ -34,4 +36,10 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
     implementation("io.ktor:ktor-server-swagger:$ktor_version")
     implementation("io.ktor:ktor-server-status-pages:$ktor_version")
+    implementation("mysql:mysql-connector-java:$mysql_version")
+
+    implementation("org.jetbrains.exposed:exposed-core:$exposed_version")
+    implementation("org.jetbrains.exposed:exposed-dao:$exposed_version")
+    implementation("org.jetbrains.exposed:exposed-jdbc:$exposed_version")
+    implementation("org.jetbrains.exposed:exposed-jodatime:$exposed_version")
 }
