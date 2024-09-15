@@ -1,15 +1,15 @@
 package com.neocampunism.repository.course
 
-import com.neocampunism.db.CourseType
-import com.neocampunism.db.Courses
-import com.neocampunism.db.Departments
+import com.neocampunism.db.*
 import com.neocampunism.db.dao.CourseDao
 import com.neocampunism.db.dao.daoToModel
-import com.neocampunism.db.suspendTransaction
 import com.neocampunism.model.Course
 import org.jetbrains.exposed.dao.id.EntityID
+import org.jetbrains.exposed.sql.Op
+import org.jetbrains.exposed.sql.SqlExpressionBuilder
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.deleteWhere
+import org.jetbrains.exposed.sql.select
 
 class CourseRepositoryImpl : CourseRepository {
     override suspend fun addCourse(course: Course): Course? = suspendTransaction {
@@ -72,6 +72,19 @@ class CourseRepositoryImpl : CourseRepository {
     }
 
     override suspend fun deleteCourse(id: Int): Boolean = suspendTransaction {
+        SemestersCourses.deleteWhere { courseID eq id }
+
         Courses.deleteWhere { Courses.id eq id } == 1
+    }
+
+    override suspend fun getAllCoursesBySemesterId(semesterId: Int): List<Course> = suspendTransaction {
+        (SemestersCourses innerJoin Courses)
+            .select(Courses.columns)
+            .where { SemestersCourses.semesterID eq semesterId }
+            .map { row ->
+                daoToModel(
+                    CourseDao.wrapRow(row)
+                )
+            }
     }
 }

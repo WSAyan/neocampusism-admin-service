@@ -8,4 +8,5 @@ interface CourseRepository {
     suspend fun getCourseById(id: Int): Course?
     suspend fun updateCourse(id: Int, course: Course): Course?
     suspend fun deleteCourse(id: Int): Boolean
+    suspend fun getAllCoursesBySemesterId(semesterId: Int): List<Course>
 }

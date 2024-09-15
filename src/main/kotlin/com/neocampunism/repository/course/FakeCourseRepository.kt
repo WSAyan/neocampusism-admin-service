@@ -26,4 +26,8 @@ class FakeCourseRepository : CourseRepository {
     override suspend fun deleteCourse(id: Int): Boolean {
         return courses.removeIf { it.courseID == id }
     }
+
+    override suspend fun getAllCoursesBySemesterId(semesterId: Int): List<Course> {
+        return listOf()
+    }
 }
