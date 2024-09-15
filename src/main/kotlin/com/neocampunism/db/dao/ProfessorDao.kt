@@ -14,6 +14,7 @@ class ProfessorDao(id: EntityID<Int>) : IntEntity(id) {
     var shortName by Professors.shortName
     var departmentID by Professors.departmentID
     var email by Professors.email
+    var phone by Professors.phone
 }
 
 fun daoToModel(dao: ProfessorDao) =  Professor(
@@ -23,4 +24,5 @@ fun daoToModel(dao: ProfessorDao) =  Professor(
     shortName = dao.shortName,
     departmentID = dao.departmentID?.value,
     email = dao.email,
+    phone = dao.phone,
 )

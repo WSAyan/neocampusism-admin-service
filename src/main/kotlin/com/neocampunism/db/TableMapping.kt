@@ -16,6 +16,7 @@ object Professors : IntIdTable("Professors") {
     val shortName = varchar("ShortName", 10)
     val departmentID = reference("DepartmentID", Departments.id).nullable()
     val email = varchar("Email", 100).nullable()
+    val phone = varchar("phone", 100).nullable()
 }
 
 

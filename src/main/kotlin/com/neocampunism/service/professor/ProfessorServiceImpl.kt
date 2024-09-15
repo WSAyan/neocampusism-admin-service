@@ -6,11 +6,10 @@ import com.neocampunism.response.ApiResponse
 
 class ProfessorServiceImpl(private val professorRepository: ProfessorRepository) : ProfessorService {
     override suspend fun createProfessor(professor: Professor): ApiResponse<Professor> {
-        return if (professorRepository.addProfessor(professor)) {
-            ApiResponse(status = "success", message = "Professor created", data = professor)
-        } else {
-            ApiResponse(status = "failed", message = "Failed to create professor")
-        }
+        val newProfessor = professorRepository.addProfessor(professor)
+            ?: return ApiResponse(status = "failed", message = "Failed to create professor")
+
+        return ApiResponse(status = "success", message = "Professor created", data = newProfessor)
     }
 
     override suspend fun getProfessors(): ApiResponse<Map<String, List<Professor>>> {
@@ -24,19 +23,20 @@ class ProfessorServiceImpl(private val professorRepository: ProfessorRepository)
 
     override suspend fun getProfessor(id: Int): ApiResponse<Professor> {
         val professor = professorRepository.getProfessorById(id)
-        return if (professor != null) {
-            ApiResponse(status = "success", message = "Professor retrieved", data = professor)
-        } else {
-            ApiResponse(status = "failed", message = "Professor not found")
-        }
+            ?: return ApiResponse(status = "failed", message = "Professor not found")
+
+        return ApiResponse(status = "success", message = "Professor retrieved", data = professor)
     }
 
     override suspend fun updateProfessor(id: Int, professor: Professor): ApiResponse<Professor> {
-        return if (professorRepository.updateProfessor(id, professor)) {
-            ApiResponse(status = "success", message = "Professor updated", data = professor)
-        } else {
-            ApiResponse(status = "failed", message = "Failed to update professor")
-        }
+        val updatedProfessor = professorRepository.updateProfessor(id, professor)
+            ?: return ApiResponse(status = "failed", message = "Failed to update professor")
+
+        return ApiResponse(
+            status = "success",
+            message = "Professor updated",
+            data = updatedProfessor
+        )
     }
 
     override suspend fun deleteProfessor(id: Int): ApiResponse<Any> {

@@ -60,7 +60,7 @@ class CourseRepositoryImpl : CourseRepository {
 
         course.departmentID ?: return@suspendTransaction null
 
-        val updatedCourse = CourseDao.findSingleByAndUpdate(Departments.id eq id) {
+        val updatedCourse = CourseDao.findSingleByAndUpdate(Courses.id eq id) {
             it.courseName = course.courseName
             it.courseType = CourseType.valueOf(course.courseType.name)
             it.courseCode = course.courseCode
