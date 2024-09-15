@@ -42,7 +42,7 @@ class ProfessorRepositoryImpl: ProfessorRepository {
     override suspend fun getProfessorById(id: Int): Professor? = suspendTransaction {
         ProfessorDao
             .find {
-                Courses.id eq id
+                Professors.id eq id
             }
             .map(::daoToModel)
             .firstOrNull()
@@ -74,6 +74,6 @@ class ProfessorRepositoryImpl: ProfessorRepository {
     }
 
     override suspend fun deleteProfessor(id: Int): Boolean = suspendTransaction {
-        Courses.deleteWhere { Professors.id eq id } == 1
+        Professors.deleteWhere { Professors.id eq id } == 1
     }
 }

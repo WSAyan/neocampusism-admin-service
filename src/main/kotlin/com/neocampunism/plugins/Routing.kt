@@ -8,6 +8,7 @@ import com.neocampunism.repository.professor.FakeProfessorRepository
 import com.neocampunism.repository.professor.ProfessorRepository
 import com.neocampunism.repository.professor.ProfessorRepositoryImpl
 import com.neocampunism.repository.room.FakeRoomRepository
+import com.neocampunism.repository.room.RoomRepositoryImpl
 import com.neocampunism.repository.time_slot.FakeTimeSlotRepository
 import com.neocampunism.routing.*
 import com.neocampunism.response.ApiResponse
@@ -76,6 +77,6 @@ fun Application.configureRouting() {
         professorRoutes(ProfessorServiceImpl(ProfessorRepositoryImpl()))
         courseRoutes(CourseServiceImpl(CourseRepositoryImpl()))
         timeSlotRoutes(TimeSlotServiceImpl(FakeTimeSlotRepository()))
-        roomRoutes(RoomServiceImpl(FakeRoomRepository()))
+        roomRoutes(RoomServiceImpl(RoomRepositoryImpl()))
     }
 }

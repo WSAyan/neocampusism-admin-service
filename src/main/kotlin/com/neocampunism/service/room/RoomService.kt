@@ -8,5 +8,5 @@ interface RoomService {
     suspend fun getRooms(): ApiResponse<Map<String, List<Room>>>
     suspend fun getRoom(id: Int): ApiResponse<Room>
     suspend fun updateRoom(id: Int, room: Room): ApiResponse<Room>
-    suspend fun deleteRoom(id: Int): ApiResponse<Any>
+    suspend fun deleteRoom(id: Int): ApiResponse<Room>
 }

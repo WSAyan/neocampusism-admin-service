@@ -6,9 +6,9 @@ class FakeRoomRepository : RoomRepository {
     private val rooms = mutableListOf<Room>()
     private var nextId = 1
 
-    override suspend fun addRoom(room: Room): Boolean {
+    override suspend fun addRoom(room: Room): Room? {
         rooms.add(room.copy(roomID = nextId++))
-        return true
+        return rooms.lastOrNull()
     }
 
     override suspend fun getAllRooms(): List<Room> {
@@ -19,13 +19,8 @@ class FakeRoomRepository : RoomRepository {
         return rooms.find { it.roomID == id }
     }
 
-    override suspend fun updateRoom(id: Int, room: Room): Boolean {
-        val index = rooms.indexOfFirst { it.roomID == id }
-        if (index != -1) {
-            rooms[index] = room.copy(roomID = id)
-            return true
-        }
-        return false
+    override suspend fun updateRoom(id: Int, room: Room): Room? {
+        return rooms.firstOrNull { it.roomID == id }
     }
 
     override suspend fun deleteRoom(id: Int): Boolean {
