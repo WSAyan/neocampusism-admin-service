@@ -6,7 +6,7 @@ import com.neocampunism.response.ApiResponse
 
 class TimeSlotServiceImpl(private val timeSlotRepository: TimeSlotRepository) : TimeSlotService {
     override suspend fun createTimeSlot(timeSlot: TimeSlot): ApiResponse<TimeSlot> {
-        return if (timeSlotRepository.addTimeSlot(timeSlot)) {
+        return if (timeSlotRepository.addTimeSlot(timeSlot) != null) {
             ApiResponse(status = "success", message = "Time Slot created", data = timeSlot)
         } else {
             ApiResponse(status = "failed", message = "Failed to create time slot")
@@ -32,7 +32,7 @@ class TimeSlotServiceImpl(private val timeSlotRepository: TimeSlotRepository) : 
     }
 
     override suspend fun updateTimeSlot(id: Int, timeSlot: TimeSlot): ApiResponse<TimeSlot> {
-        return if (timeSlotRepository.updateTimeSlot(id, timeSlot)) {
+        return if (timeSlotRepository.updateTimeSlot(id, timeSlot) != null) {
             ApiResponse(status = "success", message = "Time Slot updated", data = timeSlot)
         } else {
             ApiResponse(status = "failed", message = "Failed to update time slot")
