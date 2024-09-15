@@ -1,8 +1,9 @@
 package com.neocampunism.db.dao
 
 import com.neocampunism.db.Courses
-import com.neocampunism.db.Semesters
 import com.neocampunism.db.SemestersCourses
+import com.neocampunism.db.suspendTransaction
+import com.neocampunism.model.Course
 import com.neocampunism.model.SemesterCourse
 import org.jetbrains.exposed.dao.IntEntity
 import org.jetbrains.exposed.dao.IntEntityClass
@@ -20,3 +21,13 @@ fun daoToModel(dao: SemestersCoursesDao) = SemesterCourse(
     semesterCourseID = dao.id.value,
     courseID = dao.courseID.value,
 )
+
+fun Int.coursesOfThisSemester(): List<Course> =
+    (SemestersCourses innerJoin Courses)
+        .select(Courses.columns)
+        .where { SemestersCourses.semesterID eq this@coursesOfThisSemester }
+        .map { row ->
+            daoToModel(
+                CourseDao.wrapRow(row)
+            )
+        }
