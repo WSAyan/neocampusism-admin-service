@@ -6,9 +6,9 @@ class FakeCourseRepository : CourseRepository {
     private val courses = mutableListOf<Course>()
     private var nextId = 1
 
-    override suspend fun addCourse(course: Course): Boolean {
+    override suspend fun addCourse(course: Course): Course? {
         courses.add(course.copy(courseID = nextId++))
-        return true
+        return courses.lastOrNull()
     }
 
     override suspend fun getAllCourses(): List<Course> {
@@ -19,13 +19,8 @@ class FakeCourseRepository : CourseRepository {
         return courses.find { it.courseID == id }
     }
 
-    override suspend fun updateCourse(id: Int, course: Course): Boolean {
-        val index = courses.indexOfFirst { it.courseID == id }
-        if (index != -1) {
-            courses[index] = course.copy(courseID = id)
-            return true
-        }
-        return false
+    override suspend fun updateCourse(id: Int, course: Course): Course? {
+        return  courses.firstOrNull { it.courseID == id }
     }
 
     override suspend fun deleteCourse(id: Int): Boolean {

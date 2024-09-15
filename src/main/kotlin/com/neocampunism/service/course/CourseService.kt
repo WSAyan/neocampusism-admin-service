@@ -8,5 +8,5 @@ interface CourseService {
     suspend fun getCourses(): ApiResponse<Map<String, List<Course>>>
     suspend fun getCourse(id: Int): ApiResponse<Course>
     suspend fun updateCourse(id: Int, course: Course): ApiResponse<Course>
-    suspend fun deleteCourse(id: Int): ApiResponse<Any>
+    suspend fun deleteCourse(id: Int): ApiResponse<Course>
 }

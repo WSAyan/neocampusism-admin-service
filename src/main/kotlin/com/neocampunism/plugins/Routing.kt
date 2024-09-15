@@ -1,5 +1,6 @@
 package com.neocampunism.plugins
 
+import com.neocampunism.repository.course.CourseRepositoryImpl
 import com.neocampunism.repository.course.FakeCourseRepository
 import com.neocampunism.repository.department.DepartmentRepositoryImpl
 import com.neocampunism.repository.department.FakeDepartmentRepository
@@ -71,7 +72,7 @@ fun Application.configureRouting() {
 
         departmentRoutes(DepartmentServiceImpl(DepartmentRepositoryImpl()))
         professorRoutes(ProfessorServiceImpl(FakeProfessorRepository()))
-        courseRoutes(CourseServiceImpl(FakeCourseRepository()))
+        courseRoutes(CourseServiceImpl(CourseRepositoryImpl()))
         timeSlotRoutes(TimeSlotServiceImpl(FakeTimeSlotRepository()))
         roomRoutes(RoomServiceImpl(FakeRoomRepository()))
     }

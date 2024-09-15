@@ -6,11 +6,13 @@ import com.neocampunism.response.ApiResponse
 
 class CourseServiceImpl(private val courseRepository: CourseRepository) : CourseService {
     override suspend fun createCourse(course: Course): ApiResponse<Course> {
-        return if (courseRepository.addCourse(course)) {
-            ApiResponse(status = "success", message = "Course created", data = course)
-        } else {
-            ApiResponse(status = "failed", message = "Failed to create course")
-        }
+        val newCourse =
+            courseRepository.addCourse(course) ?: return ApiResponse(
+                status = "failed",
+                message = "Failed to create course"
+            )
+
+        return ApiResponse(status = "success", message = "Course created", data = newCourse)
     }
 
     override suspend fun getCourses(): ApiResponse<Map<String, List<Course>>> {
@@ -23,23 +25,26 @@ class CourseServiceImpl(private val courseRepository: CourseRepository) : Course
     }
 
     override suspend fun getCourse(id: Int): ApiResponse<Course> {
-        val course = courseRepository.getCourseById(id)
-        return if (course != null) {
-            ApiResponse(status = "success", message = "Course retrieved", data = course)
-        } else {
-            ApiResponse(status = "failed", message = "Course not found")
-        }
+        val course =
+            courseRepository.getCourseById(id)
+                ?: return ApiResponse(
+                    status = "failed",
+                    message = "Course not found"
+                )
+
+        return ApiResponse(status = "success", message = "Course retrieved", data = course)
     }
 
     override suspend fun updateCourse(id: Int, course: Course): ApiResponse<Course> {
-        return if (courseRepository.updateCourse(id, course)) {
-            ApiResponse(status = "success", message = "Course updated", data = course)
-        } else {
-            ApiResponse(status = "failed", message = "Failed to update course")
-        }
+        val updatedCourse = courseRepository.updateCourse(id, course)
+            ?: return ApiResponse(
+                status = "failed",
+                message = "Failed to update course"
+            )
+        return ApiResponse(status = "success", message = "Course updated", data = updatedCourse)
     }
 
-    override suspend fun deleteCourse(id: Int): ApiResponse<Any> {
+    override suspend fun deleteCourse(id: Int): ApiResponse<Course> {
         return if (courseRepository.deleteCourse(id)) {
             ApiResponse(status = "success", message = "Course deleted")
         } else {
