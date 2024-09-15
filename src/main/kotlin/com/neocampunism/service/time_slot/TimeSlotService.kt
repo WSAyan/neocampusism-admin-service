@@ -8,5 +8,5 @@ interface TimeSlotService {
     suspend fun getTimeSlots(): ApiResponse<Map<String, List<TimeSlot>>>
     suspend fun getTimeSlot(id: Int): ApiResponse<TimeSlot>
     suspend fun updateTimeSlot(id: Int, timeSlot: TimeSlot): ApiResponse<TimeSlot>
-    suspend fun deleteTimeSlot(id: Int): ApiResponse<Any>
+    suspend fun deleteTimeSlot(id: Int): ApiResponse<TimeSlot>
 }

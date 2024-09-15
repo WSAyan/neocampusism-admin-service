@@ -8,5 +8,5 @@ interface ProfessorService {
     suspend fun getProfessors(): ApiResponse<Map<String, List<Professor>>>
     suspend fun getProfessor(id: Int): ApiResponse<Professor>
     suspend fun updateProfessor(id: Int, professor: Professor): ApiResponse<Professor>
-    suspend fun deleteProfessor(id: Int): ApiResponse<Any>
+    suspend fun deleteProfessor(id: Int): ApiResponse<Professor>
 }

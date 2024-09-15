@@ -6,9 +6,9 @@ class FakeTimeSlotRepository : TimeSlotRepository {
     private val timeSlots = mutableListOf<TimeSlot>()
     private var nextId = 1
 
-    override suspend fun addTimeSlot(timeSlot: TimeSlot): Boolean {
+    override suspend fun addTimeSlot(timeSlot: TimeSlot): TimeSlot? {
         timeSlots.add(timeSlot.copy(timeSlotID = nextId++))
-        return true
+        return timeSlots.lastOrNull()
     }
 
     override suspend fun getAllTimeSlots(): List<TimeSlot> {
@@ -19,13 +19,8 @@ class FakeTimeSlotRepository : TimeSlotRepository {
         return timeSlots.find { it.timeSlotID == id }
     }
 
-    override suspend fun updateTimeSlot(id: Int, timeSlot: TimeSlot): Boolean {
-        val index = timeSlots.indexOfFirst { it.timeSlotID == id }
-        if (index != -1) {
-            timeSlots[index] = timeSlot.copy(timeSlotID = id)
-            return true
-        }
-        return false
+    override suspend fun updateTimeSlot(id: Int, timeSlot: TimeSlot): TimeSlot? {
+        return timeSlots.firstOrNull { it.timeSlotID == id }
     }
 
     override suspend fun deleteTimeSlot(id: Int): Boolean {

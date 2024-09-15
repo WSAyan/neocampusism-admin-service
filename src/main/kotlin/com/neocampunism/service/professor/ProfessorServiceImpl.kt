@@ -39,7 +39,7 @@ class ProfessorServiceImpl(private val professorRepository: ProfessorRepository)
         )
     }
 
-    override suspend fun deleteProfessor(id: Int): ApiResponse<Any> {
+    override suspend fun deleteProfessor(id: Int): ApiResponse<Professor> {
         return if (professorRepository.deleteProfessor(id)) {
             ApiResponse(status = "success", message = "Professor deleted")
         } else {

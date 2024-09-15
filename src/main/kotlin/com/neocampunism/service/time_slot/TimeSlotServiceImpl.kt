@@ -39,7 +39,7 @@ class TimeSlotServiceImpl(private val timeSlotRepository: TimeSlotRepository) : 
         }
     }
 
-    override suspend fun deleteTimeSlot(id: Int): ApiResponse<Any> {
+    override suspend fun deleteTimeSlot(id: Int): ApiResponse<TimeSlot> {
         return if (timeSlotRepository.deleteTimeSlot(id)) {
             ApiResponse(status = "success", message = "Time Slot deleted")
         } else {
