@@ -21,13 +21,3 @@ fun daoToModel(dao: SemestersCoursesDao) = SemesterCourse(
     semesterCourseID = dao.id.value,
     courseID = dao.courseID.value,
 )
-
-fun Int.coursesOfThisSemester(): List<Course> =
-    (SemestersCourses innerJoin Courses)
-        .select(Courses.columns)
-        .where { SemestersCourses.semesterID eq this@coursesOfThisSemester }
-        .map { row ->
-            daoToModel(
-                CourseDao.wrapRow(row)
-            )
-        }

@@ -1,7 +1,6 @@
 package com.neocampunism.service.semester
 
 import com.neocampunism.model.Semester
-import com.neocampunism.repository.room.RoomRepository
 import com.neocampunism.repository.semester.SemesterRepositoryImpl
 import com.neocampunism.response.ApiResponse
 

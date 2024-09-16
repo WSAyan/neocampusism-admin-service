@@ -1,17 +1,13 @@
 package com.neocampunism.repository.semester
 
-import com.neocampunism.db.Courses
 import com.neocampunism.db.Semesters
 import com.neocampunism.db.SemestersCourses
 import com.neocampunism.db.dao.SemesterDao
-import com.neocampunism.db.dao.coursesOfThisSemester
 import com.neocampunism.db.dao.daoToModel
 import com.neocampunism.db.suspendTransaction
 import com.neocampunism.model.Semester
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.deleteWhere
-import org.jetbrains.exposed.sql.joinQuery
-import org.jetbrains.exposed.sql.select
 
 class SemesterRepositoryImpl : SemesterRepository {
     override suspend fun addSemester(semester: Semester): Semester? = suspendTransaction {
@@ -27,16 +23,15 @@ class SemesterRepositoryImpl : SemesterRepository {
     }
 
     override suspend fun getAllSemesters(): List<Semester> = suspendTransaction {
-        SemesterDao.all().map(::daoToModel).map { it.copy(courses = it.semesterID?.coursesOfThisSemester()) }
+        SemesterDao.all().map(::daoToModel)
     }
 
     override suspend fun getSemesterById(id: Int): Semester? = suspendTransaction {
         SemesterDao
             .find {
-                Courses.id eq id
+                Semesters.id eq id
             }
             .map(::daoToModel)
-            .map { it.copy(courses = id.coursesOfThisSemester()) }
             .firstOrNull()
     }
 
