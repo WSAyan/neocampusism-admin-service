@@ -5,6 +5,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class SemesterCourse(
     val semesterCourseID: Int?= null,
-    val semesterID: Int?= null,
-    val courseID: Int?= null,
+    val semester: Semester?= null,
+    val course: Course?= null,
 )

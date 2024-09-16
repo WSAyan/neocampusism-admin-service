@@ -5,7 +5,7 @@ import com.neocampunism.repository.department.DepartmentRepositoryImpl
 import com.neocampunism.repository.professor.ProfessorRepositoryImpl
 import com.neocampunism.repository.room.RoomRepositoryImpl
 import com.neocampunism.repository.semester.SemesterRepositoryImpl
-import com.neocampunism.repository.time_slot.FakeTimeSlotRepository
+import com.neocampunism.repository.semester_course.SemestersCoursesRepositoryImpl
 import com.neocampunism.routing.*
 import com.neocampunism.response.ApiResponse
 import com.neocampunism.response.ErrorBody
@@ -14,7 +14,7 @@ import com.neocampunism.service.department.DepartmentServiceImpl
 import com.neocampunism.service.professor.ProfessorServiceImpl
 import com.neocampunism.service.room.RoomServiceImpl
 import com.neocampunism.service.semester.SemesterServiceImpl
-import com.neocampunism.service.time_slot.TimeSlotServiceImpl
+import com.neocampunism.service.semester_course.SemesterCourseServiceImpl
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
@@ -73,5 +73,6 @@ fun Application.configureRouting() {
         courseRoutes(CourseServiceImpl(CourseRepositoryImpl()))
         semesterRoutes(SemesterServiceImpl(SemesterRepositoryImpl()))
         roomRoutes(RoomServiceImpl(RoomRepositoryImpl()))
+        semesterCourseRoutes(SemesterCourseServiceImpl(SemestersCoursesRepositoryImpl()))
     }
 }
