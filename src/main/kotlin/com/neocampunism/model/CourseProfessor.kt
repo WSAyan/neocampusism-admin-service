@@ -5,6 +5,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class CourseProfessor(
     val courseProfessorID: Int? = null,
-    val courseID: Int? = null,
-    val professorID: Int? = null,
+    val course: Course? = null,
+    val professor: Professor? = null,
 )

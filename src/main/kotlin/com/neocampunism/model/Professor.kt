@@ -11,4 +11,5 @@ data class Professor(
     val departmentID: Int?= null,
     val email: String?= null,
     val phone: String?= null,
+    val courses: List<Course>? = null,
 )
