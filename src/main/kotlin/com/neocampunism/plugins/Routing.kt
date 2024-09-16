@@ -1,6 +1,7 @@
 package com.neocampunism.plugins
 
 import com.neocampunism.repository.course.CourseRepositoryImpl
+import com.neocampunism.repository.course_professor.CourseProfessorRepositoryImpl
 import com.neocampunism.repository.department.DepartmentRepositoryImpl
 import com.neocampunism.repository.professor.ProfessorRepositoryImpl
 import com.neocampunism.repository.room.RoomRepositoryImpl
@@ -10,6 +11,7 @@ import com.neocampunism.routing.*
 import com.neocampunism.response.ApiResponse
 import com.neocampunism.response.ErrorBody
 import com.neocampunism.service.course.CourseServiceImpl
+import com.neocampunism.service.course_professor.CourseProfessorServiceImpl
 import com.neocampunism.service.department.DepartmentServiceImpl
 import com.neocampunism.service.professor.ProfessorServiceImpl
 import com.neocampunism.service.room.RoomServiceImpl
@@ -74,5 +76,6 @@ fun Application.configureRouting() {
         semesterRoutes(SemesterServiceImpl(SemesterRepositoryImpl()))
         roomRoutes(RoomServiceImpl(RoomRepositoryImpl()))
         semesterCourseRoutes(SemesterCourseServiceImpl(SemestersCoursesRepositoryImpl()))
+        courseProfessorRoutes(CourseProfessorServiceImpl(CourseProfessorRepositoryImpl()))
     }
 }
