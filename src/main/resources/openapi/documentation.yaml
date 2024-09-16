@@ -17,7 +17,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Department'
+              $ref: '#/components/schemas/DepartmentCreate'
       responses:
         '201':
           description: Department created
@@ -66,7 +66,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Department'
+              $ref: '#/components/schemas/DepartmentCreate'
       responses:
         '200':
           description: Department updated
@@ -95,7 +95,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Room'
+              $ref: '#/components/schemas/RoomCreate'
       responses:
         '201':
           description: Room created
@@ -144,7 +144,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Room'
+              $ref: '#/components/schemas/RoomCreate'
       responses:
         '200':
           description: Room updated
@@ -173,7 +173,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Professor'
+              $ref: '#/components/schemas/ProfessorCreate'
       responses:
         '201':
           description: Professor created
@@ -222,7 +222,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Professor'
+              $ref: '#/components/schemas/ProfessorCreate'
       responses:
         '200':
           description: Professor updated
@@ -251,7 +251,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Semester'
+              $ref: '#/components/schemas/SemesterCreate'
       responses:
         '201':
           description: Semester created
@@ -300,7 +300,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Semester'
+              $ref: '#/components/schemas/SemesterCreate'
       responses:
         '200':
           description: Semester updated
@@ -329,7 +329,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Course'
+              $ref: '#/components/schemas/CourseCreate'
       responses:
         '201':
           description: Course created
@@ -378,7 +378,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Course'
+              $ref: '#/components/schemas/CourseCreate'
       responses:
         '200':
           description: Course updated
@@ -407,7 +407,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SemesterCourse'
+              $ref: '#/components/schemas/SemesterCourseCreate'
       responses:
         "201":
           description: "SemesterCourse created successfully"
@@ -448,7 +448,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SemesterCourse'
+                $ref: '#/components/schemas/SemesterCourseCreate'
         "400":
           description: "Invalid SemesterCourse ID"
         "404":
@@ -511,7 +511,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CourseProfessor'
+              $ref: '#/components/schemas/CourseProfessorCreate'
       responses:
         '201':
           description: Course-Professor relationship created
@@ -560,7 +560,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CourseProfessor'
+              $ref: '#/components/schemas/CourseProfessorCreate'
       responses:
         '200':
           description: Course-Professor relationship updated
@@ -611,6 +611,21 @@ components:
           type: string
           enum: [ ONLINE, OFFLINE ]
 
+    CourseCreate:
+      type: object
+      properties:
+        courseName:
+          type: string
+        courseCode:
+          type: string
+        departmentID:
+          type: integer
+        credits:
+          type: integer
+        courseType:
+          type: string
+          enum: [ ONLINE, OFFLINE ]
+
     CourseProfessor:
       type: object
       properties:
@@ -621,11 +636,27 @@ components:
         professor:
           $ref: '#/components/schemas/Professor'
 
+    CourseProfessorCreate:
+      type: object
+      properties:
+        course:
+          $ref: '#/components/schemas/Course'
+        professor:
+          $ref: '#/components/schemas/Professor'
+
     Department:
       type: object
       properties:
         departmentID:
           type: integer
+        departmentName:
+          type: string
+        departmentCode:
+          type: string
+
+    DepartmentCreate:
+      type: object
+      properties:
         departmentName:
           type: string
         departmentCode:
@@ -653,11 +684,38 @@ components:
           items:
             $ref: '#/components/schemas/Course'
 
+    ProfessorCreate:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        shortName:
+          type: string
+        departmentID:
+          type: integer
+        email:
+          type: string
+        phone:
+          type: string
+
     Room:
       type: object
       properties:
         roomID:
           type: integer
+        roomNumber:
+          type: string
+        capacity:
+          type: integer
+        roomType:
+          type: string
+          enum: [ LECTURE, LAB ]
+
+    RoomCreate:
+      type: object
+      properties:
         roomNumber:
           type: string
         capacity:
@@ -680,11 +738,27 @@ components:
           items:
             $ref: '#/components/schemas/Course'
 
+    SemesterCreate:
+      type: object
+      properties:
+        semesterName:
+          type: string
+        semesterCode:
+          type: string
+
     SemesterCourse:
       type: object
       properties:
         semesterCourseID:
           type: integer
+        semester:
+          $ref: '#/components/schemas/Semester'
+        course:
+          $ref: '#/components/schemas/Course'
+
+    SemesterCourseCreate:
+      type: object
+      properties:
         semester:
           $ref: '#/components/schemas/Semester'
         course:

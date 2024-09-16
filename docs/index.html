@@ -713,6 +713,27 @@
     }
   }
 };
+            defs["CourseCreate"] = {
+  "type" : "object",
+  "properties" : {
+    "courseName" : {
+      "type" : "string"
+    },
+    "courseCode" : {
+      "type" : "string"
+    },
+    "departmentID" : {
+      "type" : "integer"
+    },
+    "credits" : {
+      "type" : "integer"
+    },
+    "courseType" : {
+      "type" : "string",
+      "enum" : [ "ONLINE", "OFFLINE" ]
+    }
+  }
+};
             defs["CourseProfessor"] = {
   "type" : "object",
   "properties" : {
@@ -727,13 +748,34 @@
     }
   }
 };
+            defs["CourseProfessorCreate"] = {
+  "type" : "object",
+  "properties" : {
+    "course" : {
+      "$ref" : "#/components/schemas/Course"
+    },
+    "professor" : {
+      "$ref" : "#/components/schemas/Professor"
+    }
+  }
+};
             defs["Department"] = {
   "type" : "object",
   "properties" : {
     "departmentID" : {
-      "type" : "integer",
-      "nullable" : true
+      "type" : "integer"
     },
+    "departmentName" : {
+      "type" : "string"
+    },
+    "departmentCode" : {
+      "type" : "string"
+    }
+  }
+};
+            defs["DepartmentCreate"] = {
+  "type" : "object",
+  "properties" : {
     "departmentName" : {
       "type" : "string"
     },
@@ -774,6 +816,29 @@
     }
   }
 };
+            defs["ProfessorCreate"] = {
+  "type" : "object",
+  "properties" : {
+    "firstName" : {
+      "type" : "string"
+    },
+    "lastName" : {
+      "type" : "string"
+    },
+    "shortName" : {
+      "type" : "string"
+    },
+    "departmentID" : {
+      "type" : "integer"
+    },
+    "email" : {
+      "type" : "string"
+    },
+    "phone" : {
+      "type" : "string"
+    }
+  }
+};
             defs["Response"] = {
   "type" : "object",
   "properties" : {
@@ -794,6 +859,21 @@
     "roomID" : {
       "type" : "integer"
     },
+    "roomNumber" : {
+      "type" : "string"
+    },
+    "capacity" : {
+      "type" : "integer"
+    },
+    "roomType" : {
+      "type" : "string",
+      "enum" : [ "LECTURE", "LAB" ]
+    }
+  }
+};
+            defs["RoomCreate"] = {
+  "type" : "object",
+  "properties" : {
     "roomNumber" : {
       "type" : "string"
     },
@@ -837,6 +917,28 @@
     },
     "course" : {
       "$ref" : "#/components/schemas/Course"
+    }
+  }
+};
+            defs["SemesterCourseCreate"] = {
+  "type" : "object",
+  "properties" : {
+    "semester" : {
+      "$ref" : "#/components/schemas/Semester"
+    },
+    "course" : {
+      "$ref" : "#/components/schemas/Course"
+    }
+  }
+};
+            defs["SemesterCreate"] = {
+  "type" : "object",
+  "properties" : {
+    "semesterName" : {
+      "type" : "string"
+    },
+    "semesterCode" : {
+      "type" : "string"
     }
   }
 };
@@ -1034,7 +1136,7 @@ public class DefaultApiExample {
     public static void main(String[] args) {
         
         DefaultApi apiInstance = new DefaultApi();
-        Course body = ; // Course | 
+        CourseCreate body = ; // CourseCreate | 
         try {
             Response result = apiInstance.createCourse(body);
             System.out.println(result);
@@ -1053,7 +1155,7 @@ public class DefaultApiExample {
 
     public static void main(String[] args) {
         DefaultApi apiInstance = new DefaultApi();
-        Course body = ; // Course | 
+        CourseCreate body = ; // CourseCreate | 
         try {
             Response result = apiInstance.createCourse(body);
             System.out.println(result);
@@ -1069,7 +1171,7 @@ public class DefaultApiExample {
   <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
   </div> -->
                             <div class="tab-pane" id="examples-Default-createCourse-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">Course *body = ; //  (optional)
+                              <pre class="prettyprint"><code class="language-cpp">CourseCreate *body = ; //  (optional)
 
 DefaultApi *apiInstance = [[DefaultApi alloc] init];
 
@@ -1091,7 +1193,7 @@ DefaultApi *apiInstance = [[DefaultApi alloc] init];
 
 var api = new AdminServiceApi.DefaultApi()
 var opts = { 
-  'body':  // {{Course}} 
+  'body':  // {{CourseCreate}} 
 };
 var callback = function(error, data, response) {
   if (error) {
@@ -1122,7 +1224,7 @@ namespace Example
         {
 
             var apiInstance = new DefaultApi();
-            var body = new Course(); // Course |  (optional) 
+            var body = new CourseCreate(); // CourseCreate |  (optional) 
 
             try
             {
@@ -1145,7 +1247,7 @@ namespace Example
 require_once(__DIR__ . '/vendor/autoload.php');
 
 $api_instance = new Swagger\Client\ApiDefaultApi();
-$body = ; // Course | 
+$body = ; // CourseCreate | 
 
 try {
     $result = $api_instance->createCourse($body);
@@ -1162,7 +1264,7 @@ use WWW::SwaggerClient::Configuration;
 use WWW::SwaggerClient::DefaultApi;
 
 my $api_instance = WWW::SwaggerClient::DefaultApi->new();
-my $body = WWW::SwaggerClient::Object::Course->new(); # Course | 
+my $body = WWW::SwaggerClient::Object::CourseCreate->new(); # CourseCreate | 
 
 eval { 
     my $result = $api_instance->createCourse(body => $body);
@@ -1182,7 +1284,7 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = swagger_client.DefaultApi()
-body =  # Course |  (optional)
+body =  # CourseCreate |  (optional)
 
 try: 
     # Create a new course
@@ -1213,7 +1315,7 @@ except ApiException as e:
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/Course"
+        "$ref" : "#/components/schemas/CourseCreate"
       }
     }
   }
@@ -1345,7 +1447,7 @@ public class DefaultApiExample {
     public static void main(String[] args) {
         
         DefaultApi apiInstance = new DefaultApi();
-        CourseProfessor body = ; // CourseProfessor | 
+        CourseProfessorCreate body = ; // CourseProfessorCreate | 
         try {
             Response result = apiInstance.createCourseProfessor(body);
             System.out.println(result);
@@ -1364,7 +1466,7 @@ public class DefaultApiExample {
 
     public static void main(String[] args) {
         DefaultApi apiInstance = new DefaultApi();
-        CourseProfessor body = ; // CourseProfessor | 
+        CourseProfessorCreate body = ; // CourseProfessorCreate | 
         try {
             Response result = apiInstance.createCourseProfessor(body);
             System.out.println(result);
@@ -1380,7 +1482,7 @@ public class DefaultApiExample {
   <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
   </div> -->
                             <div class="tab-pane" id="examples-Default-createCourseProfessor-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">CourseProfessor *body = ; //  (optional)
+                              <pre class="prettyprint"><code class="language-cpp">CourseProfessorCreate *body = ; //  (optional)
 
 DefaultApi *apiInstance = [[DefaultApi alloc] init];
 
@@ -1402,7 +1504,7 @@ DefaultApi *apiInstance = [[DefaultApi alloc] init];
 
 var api = new AdminServiceApi.DefaultApi()
 var opts = { 
-  'body':  // {{CourseProfessor}} 
+  'body':  // {{CourseProfessorCreate}} 
 };
 var callback = function(error, data, response) {
   if (error) {
@@ -1433,7 +1535,7 @@ namespace Example
         {
 
             var apiInstance = new DefaultApi();
-            var body = new CourseProfessor(); // CourseProfessor |  (optional) 
+            var body = new CourseProfessorCreate(); // CourseProfessorCreate |  (optional) 
 
             try
             {
@@ -1456,7 +1558,7 @@ namespace Example
 require_once(__DIR__ . '/vendor/autoload.php');
 
 $api_instance = new Swagger\Client\ApiDefaultApi();
-$body = ; // CourseProfessor | 
+$body = ; // CourseProfessorCreate | 
 
 try {
     $result = $api_instance->createCourseProfessor($body);
@@ -1473,7 +1575,7 @@ use WWW::SwaggerClient::Configuration;
 use WWW::SwaggerClient::DefaultApi;
 
 my $api_instance = WWW::SwaggerClient::DefaultApi->new();
-my $body = WWW::SwaggerClient::Object::CourseProfessor->new(); # CourseProfessor | 
+my $body = WWW::SwaggerClient::Object::CourseProfessorCreate->new(); # CourseProfessorCreate | 
 
 eval { 
     my $result = $api_instance->createCourseProfessor(body => $body);
@@ -1493,7 +1595,7 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = swagger_client.DefaultApi()
-body =  # CourseProfessor |  (optional)
+body =  # CourseProfessorCreate |  (optional)
 
 try: 
     # Create a new course-professor relationship
@@ -1524,7 +1626,7 @@ except ApiException as e:
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/CourseProfessor"
+        "$ref" : "#/components/schemas/CourseProfessorCreate"
       }
     }
   }
@@ -1656,7 +1758,7 @@ public class DefaultApiExample {
     public static void main(String[] args) {
         
         DefaultApi apiInstance = new DefaultApi();
-        Department body = ; // Department | 
+        DepartmentCreate body = ; // DepartmentCreate | 
         try {
             Response result = apiInstance.createDepartment(body);
             System.out.println(result);
@@ -1675,7 +1777,7 @@ public class DefaultApiExample {
 
     public static void main(String[] args) {
         DefaultApi apiInstance = new DefaultApi();
-        Department body = ; // Department | 
+        DepartmentCreate body = ; // DepartmentCreate | 
         try {
             Response result = apiInstance.createDepartment(body);
             System.out.println(result);
@@ -1691,7 +1793,7 @@ public class DefaultApiExample {
   <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
   </div> -->
                             <div class="tab-pane" id="examples-Default-createDepartment-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">Department *body = ; //  (optional)
+                              <pre class="prettyprint"><code class="language-cpp">DepartmentCreate *body = ; //  (optional)
 
 DefaultApi *apiInstance = [[DefaultApi alloc] init];
 
@@ -1713,7 +1815,7 @@ DefaultApi *apiInstance = [[DefaultApi alloc] init];
 
 var api = new AdminServiceApi.DefaultApi()
 var opts = { 
-  'body':  // {{Department}} 
+  'body':  // {{DepartmentCreate}} 
 };
 var callback = function(error, data, response) {
   if (error) {
@@ -1744,7 +1846,7 @@ namespace Example
         {
 
             var apiInstance = new DefaultApi();
-            var body = new Department(); // Department |  (optional) 
+            var body = new DepartmentCreate(); // DepartmentCreate |  (optional) 
 
             try
             {
@@ -1767,7 +1869,7 @@ namespace Example
 require_once(__DIR__ . '/vendor/autoload.php');
 
 $api_instance = new Swagger\Client\ApiDefaultApi();
-$body = ; // Department | 
+$body = ; // DepartmentCreate | 
 
 try {
     $result = $api_instance->createDepartment($body);
@@ -1784,7 +1886,7 @@ use WWW::SwaggerClient::Configuration;
 use WWW::SwaggerClient::DefaultApi;
 
 my $api_instance = WWW::SwaggerClient::DefaultApi->new();
-my $body = WWW::SwaggerClient::Object::Department->new(); # Department | 
+my $body = WWW::SwaggerClient::Object::DepartmentCreate->new(); # DepartmentCreate | 
 
 eval { 
     my $result = $api_instance->createDepartment(body => $body);
@@ -1804,7 +1906,7 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = swagger_client.DefaultApi()
-body =  # Department |  (optional)
+body =  # DepartmentCreate |  (optional)
 
 try: 
     # Create a new department
@@ -1835,7 +1937,7 @@ except ApiException as e:
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/Department"
+        "$ref" : "#/components/schemas/DepartmentCreate"
       }
     }
   }
@@ -1967,7 +2069,7 @@ public class DefaultApiExample {
     public static void main(String[] args) {
         
         DefaultApi apiInstance = new DefaultApi();
-        Professor body = ; // Professor | 
+        ProfessorCreate body = ; // ProfessorCreate | 
         try {
             Response result = apiInstance.createProfessor(body);
             System.out.println(result);
@@ -1986,7 +2088,7 @@ public class DefaultApiExample {
 
     public static void main(String[] args) {
         DefaultApi apiInstance = new DefaultApi();
-        Professor body = ; // Professor | 
+        ProfessorCreate body = ; // ProfessorCreate | 
         try {
             Response result = apiInstance.createProfessor(body);
             System.out.println(result);
@@ -2002,7 +2104,7 @@ public class DefaultApiExample {
   <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
   </div> -->
                             <div class="tab-pane" id="examples-Default-createProfessor-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">Professor *body = ; //  (optional)
+                              <pre class="prettyprint"><code class="language-cpp">ProfessorCreate *body = ; //  (optional)
 
 DefaultApi *apiInstance = [[DefaultApi alloc] init];
 
@@ -2024,7 +2126,7 @@ DefaultApi *apiInstance = [[DefaultApi alloc] init];
 
 var api = new AdminServiceApi.DefaultApi()
 var opts = { 
-  'body':  // {{Professor}} 
+  'body':  // {{ProfessorCreate}} 
 };
 var callback = function(error, data, response) {
   if (error) {
@@ -2055,7 +2157,7 @@ namespace Example
         {
 
             var apiInstance = new DefaultApi();
-            var body = new Professor(); // Professor |  (optional) 
+            var body = new ProfessorCreate(); // ProfessorCreate |  (optional) 
 
             try
             {
@@ -2078,7 +2180,7 @@ namespace Example
 require_once(__DIR__ . '/vendor/autoload.php');
 
 $api_instance = new Swagger\Client\ApiDefaultApi();
-$body = ; // Professor | 
+$body = ; // ProfessorCreate | 
 
 try {
     $result = $api_instance->createProfessor($body);
@@ -2095,7 +2197,7 @@ use WWW::SwaggerClient::Configuration;
 use WWW::SwaggerClient::DefaultApi;
 
 my $api_instance = WWW::SwaggerClient::DefaultApi->new();
-my $body = WWW::SwaggerClient::Object::Professor->new(); # Professor | 
+my $body = WWW::SwaggerClient::Object::ProfessorCreate->new(); # ProfessorCreate | 
 
 eval { 
     my $result = $api_instance->createProfessor(body => $body);
@@ -2115,7 +2217,7 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = swagger_client.DefaultApi()
-body =  # Professor |  (optional)
+body =  # ProfessorCreate |  (optional)
 
 try: 
     # Create a new professor
@@ -2146,7 +2248,7 @@ except ApiException as e:
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/Professor"
+        "$ref" : "#/components/schemas/ProfessorCreate"
       }
     }
   }
@@ -2278,7 +2380,7 @@ public class DefaultApiExample {
     public static void main(String[] args) {
         
         DefaultApi apiInstance = new DefaultApi();
-        Room body = ; // Room | 
+        RoomCreate body = ; // RoomCreate | 
         try {
             Response result = apiInstance.createRoom(body);
             System.out.println(result);
@@ -2297,7 +2399,7 @@ public class DefaultApiExample {
 
     public static void main(String[] args) {
         DefaultApi apiInstance = new DefaultApi();
-        Room body = ; // Room | 
+        RoomCreate body = ; // RoomCreate | 
         try {
             Response result = apiInstance.createRoom(body);
             System.out.println(result);
@@ -2313,7 +2415,7 @@ public class DefaultApiExample {
   <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
   </div> -->
                             <div class="tab-pane" id="examples-Default-createRoom-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">Room *body = ; //  (optional)
+                              <pre class="prettyprint"><code class="language-cpp">RoomCreate *body = ; //  (optional)
 
 DefaultApi *apiInstance = [[DefaultApi alloc] init];
 
@@ -2335,7 +2437,7 @@ DefaultApi *apiInstance = [[DefaultApi alloc] init];
 
 var api = new AdminServiceApi.DefaultApi()
 var opts = { 
-  'body':  // {{Room}} 
+  'body':  // {{RoomCreate}} 
 };
 var callback = function(error, data, response) {
   if (error) {
@@ -2366,7 +2468,7 @@ namespace Example
         {
 
             var apiInstance = new DefaultApi();
-            var body = new Room(); // Room |  (optional) 
+            var body = new RoomCreate(); // RoomCreate |  (optional) 
 
             try
             {
@@ -2389,7 +2491,7 @@ namespace Example
 require_once(__DIR__ . '/vendor/autoload.php');
 
 $api_instance = new Swagger\Client\ApiDefaultApi();
-$body = ; // Room | 
+$body = ; // RoomCreate | 
 
 try {
     $result = $api_instance->createRoom($body);
@@ -2406,7 +2508,7 @@ use WWW::SwaggerClient::Configuration;
 use WWW::SwaggerClient::DefaultApi;
 
 my $api_instance = WWW::SwaggerClient::DefaultApi->new();
-my $body = WWW::SwaggerClient::Object::Room->new(); # Room | 
+my $body = WWW::SwaggerClient::Object::RoomCreate->new(); # RoomCreate | 
 
 eval { 
     my $result = $api_instance->createRoom(body => $body);
@@ -2426,7 +2528,7 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = swagger_client.DefaultApi()
-body =  # Room |  (optional)
+body =  # RoomCreate |  (optional)
 
 try: 
     # Create a new room
@@ -2457,7 +2559,7 @@ except ApiException as e:
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/Room"
+        "$ref" : "#/components/schemas/RoomCreate"
       }
     }
   }
@@ -2589,7 +2691,7 @@ public class DefaultApiExample {
     public static void main(String[] args) {
         
         DefaultApi apiInstance = new DefaultApi();
-        Semester body = ; // Semester | 
+        SemesterCreate body = ; // SemesterCreate | 
         try {
             Response result = apiInstance.createSemester(body);
             System.out.println(result);
@@ -2608,7 +2710,7 @@ public class DefaultApiExample {
 
     public static void main(String[] args) {
         DefaultApi apiInstance = new DefaultApi();
-        Semester body = ; // Semester | 
+        SemesterCreate body = ; // SemesterCreate | 
         try {
             Response result = apiInstance.createSemester(body);
             System.out.println(result);
@@ -2624,7 +2726,7 @@ public class DefaultApiExample {
   <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
   </div> -->
                             <div class="tab-pane" id="examples-Default-createSemester-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">Semester *body = ; //  (optional)
+                              <pre class="prettyprint"><code class="language-cpp">SemesterCreate *body = ; //  (optional)
 
 DefaultApi *apiInstance = [[DefaultApi alloc] init];
 
@@ -2646,7 +2748,7 @@ DefaultApi *apiInstance = [[DefaultApi alloc] init];
 
 var api = new AdminServiceApi.DefaultApi()
 var opts = { 
-  'body':  // {{Semester}} 
+  'body':  // {{SemesterCreate}} 
 };
 var callback = function(error, data, response) {
   if (error) {
@@ -2677,7 +2779,7 @@ namespace Example
         {
 
             var apiInstance = new DefaultApi();
-            var body = new Semester(); // Semester |  (optional) 
+            var body = new SemesterCreate(); // SemesterCreate |  (optional) 
 
             try
             {
@@ -2700,7 +2802,7 @@ namespace Example
 require_once(__DIR__ . '/vendor/autoload.php');
 
 $api_instance = new Swagger\Client\ApiDefaultApi();
-$body = ; // Semester | 
+$body = ; // SemesterCreate | 
 
 try {
     $result = $api_instance->createSemester($body);
@@ -2717,7 +2819,7 @@ use WWW::SwaggerClient::Configuration;
 use WWW::SwaggerClient::DefaultApi;
 
 my $api_instance = WWW::SwaggerClient::DefaultApi->new();
-my $body = WWW::SwaggerClient::Object::Semester->new(); # Semester | 
+my $body = WWW::SwaggerClient::Object::SemesterCreate->new(); # SemesterCreate | 
 
 eval { 
     my $result = $api_instance->createSemester(body => $body);
@@ -2737,7 +2839,7 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = swagger_client.DefaultApi()
-body =  # Semester |  (optional)
+body =  # SemesterCreate |  (optional)
 
 try: 
     # Create a new semester
@@ -2768,7 +2870,7 @@ except ApiException as e:
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/Semester"
+        "$ref" : "#/components/schemas/SemesterCreate"
       }
     }
   }
@@ -8247,7 +8349,7 @@ public class DefaultApiExample {
         DefaultApi apiInstance = new DefaultApi();
         Integer id = 56; // Integer | SemesterCourse ID
         try {
-            SemesterCourse result = apiInstance.semesterCoursesIdGet(id);
+            SemesterCourseCreate result = apiInstance.semesterCoursesIdGet(id);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling DefaultApi#semesterCoursesIdGet");
@@ -8266,7 +8368,7 @@ public class DefaultApiExample {
         DefaultApi apiInstance = new DefaultApi();
         Integer id = 56; // Integer | SemesterCourse ID
         try {
-            SemesterCourse result = apiInstance.semesterCoursesIdGet(id);
+            SemesterCourseCreate result = apiInstance.semesterCoursesIdGet(id);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling DefaultApi#semesterCoursesIdGet");
@@ -8286,7 +8388,7 @@ DefaultApi *apiInstance = [[DefaultApi alloc] init];
 
 // Get a SemesterCourse by ID
 [apiInstance semesterCoursesIdGetWith:id
-              completionHandler: ^(SemesterCourse output, NSError* error) {
+              completionHandler: ^(SemesterCourseCreate output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
                             }
@@ -8337,7 +8439,7 @@ namespace Example
             try
             {
                 // Get a SemesterCourse by ID
-                SemesterCourse result = apiInstance.semesterCoursesIdGet(id);
+                SemesterCourseCreate result = apiInstance.semesterCoursesIdGet(id);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -8459,7 +8561,7 @@ except ApiException as e:
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/SemesterCourse"
+        "$ref" : "#/components/schemas/SemesterCourseCreate"
       }
     }
   }
@@ -8923,7 +9025,7 @@ public class DefaultApiExample {
     public static void main(String[] args) {
         
         DefaultApi apiInstance = new DefaultApi();
-        SemesterCourse body = ; // SemesterCourse | 
+        SemesterCourseCreate body = ; // SemesterCourseCreate | 
         try {
             Response result = apiInstance.semesterCoursesPost(body);
             System.out.println(result);
@@ -8942,7 +9044,7 @@ public class DefaultApiExample {
 
     public static void main(String[] args) {
         DefaultApi apiInstance = new DefaultApi();
-        SemesterCourse body = ; // SemesterCourse | 
+        SemesterCourseCreate body = ; // SemesterCourseCreate | 
         try {
             Response result = apiInstance.semesterCoursesPost(body);
             System.out.println(result);
@@ -8958,7 +9060,7 @@ public class DefaultApiExample {
   <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
   </div> -->
                             <div class="tab-pane" id="examples-Default-semesterCoursesPost-0-objc">
-                              <pre class="prettyprint"><code class="language-cpp">SemesterCourse *body = ; // 
+                              <pre class="prettyprint"><code class="language-cpp">SemesterCourseCreate *body = ; // 
 
 DefaultApi *apiInstance = [[DefaultApi alloc] init];
 
@@ -8979,7 +9081,7 @@ DefaultApi *apiInstance = [[DefaultApi alloc] init];
                               <pre class="prettyprint"><code class="language-js">var AdminServiceApi = require('admin_service_api');
 
 var api = new AdminServiceApi.DefaultApi()
-var body = ; // {{SemesterCourse}} 
+var body = ; // {{SemesterCourseCreate}} 
 
 var callback = function(error, data, response) {
   if (error) {
@@ -9010,7 +9112,7 @@ namespace Example
         {
 
             var apiInstance = new DefaultApi();
-            var body = new SemesterCourse(); // SemesterCourse | 
+            var body = new SemesterCourseCreate(); // SemesterCourseCreate | 
 
             try
             {
@@ -9033,7 +9135,7 @@ namespace Example
 require_once(__DIR__ . '/vendor/autoload.php');
 
 $api_instance = new Swagger\Client\ApiDefaultApi();
-$body = ; // SemesterCourse | 
+$body = ; // SemesterCourseCreate | 
 
 try {
     $result = $api_instance->semesterCoursesPost($body);
@@ -9050,7 +9152,7 @@ use WWW::SwaggerClient::Configuration;
 use WWW::SwaggerClient::DefaultApi;
 
 my $api_instance = WWW::SwaggerClient::DefaultApi->new();
-my $body = WWW::SwaggerClient::Object::SemesterCourse->new(); # SemesterCourse | 
+my $body = WWW::SwaggerClient::Object::SemesterCourseCreate->new(); # SemesterCourseCreate | 
 
 eval { 
     my $result = $api_instance->semesterCoursesPost(body => $body);
@@ -9070,7 +9172,7 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = swagger_client.DefaultApi()
-body =  # SemesterCourse | 
+body =  # SemesterCourseCreate | 
 
 try: 
     # Create a new SemesterCourse
@@ -9101,7 +9203,7 @@ except ApiException as e:
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/SemesterCourse"
+        "$ref" : "#/components/schemas/SemesterCourseCreate"
       }
     }
   },
@@ -9243,7 +9345,7 @@ public class DefaultApiExample {
         
         DefaultApi apiInstance = new DefaultApi();
         Integer id = 56; // Integer | 
-        Course body = ; // Course | 
+        CourseCreate body = ; // CourseCreate | 
         try {
             Response result = apiInstance.updateCourse(id, body);
             System.out.println(result);
@@ -9263,7 +9365,7 @@ public class DefaultApiExample {
     public static void main(String[] args) {
         DefaultApi apiInstance = new DefaultApi();
         Integer id = 56; // Integer | 
-        Course body = ; // Course | 
+        CourseCreate body = ; // CourseCreate | 
         try {
             Response result = apiInstance.updateCourse(id, body);
             System.out.println(result);
@@ -9280,7 +9382,7 @@ public class DefaultApiExample {
   </div> -->
                             <div class="tab-pane" id="examples-Default-updateCourse-0-objc">
                               <pre class="prettyprint"><code class="language-cpp">Integer *id = 56; // 
-Course *body = ; //  (optional)
+CourseCreate *body = ; //  (optional)
 
 DefaultApi *apiInstance = [[DefaultApi alloc] init];
 
@@ -9304,7 +9406,7 @@ DefaultApi *apiInstance = [[DefaultApi alloc] init];
 var api = new AdminServiceApi.DefaultApi()
 var id = 56; // {{Integer}} 
 var opts = { 
-  'body':  // {{Course}} 
+  'body':  // {{CourseCreate}} 
 };
 var callback = function(error, data, response) {
   if (error) {
@@ -9336,7 +9438,7 @@ namespace Example
 
             var apiInstance = new DefaultApi();
             var id = 56;  // Integer | 
-            var body = new Course(); // Course |  (optional) 
+            var body = new CourseCreate(); // CourseCreate |  (optional) 
 
             try
             {
@@ -9360,7 +9462,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 $api_instance = new Swagger\Client\ApiDefaultApi();
 $id = 56; // Integer | 
-$body = ; // Course | 
+$body = ; // CourseCreate | 
 
 try {
     $result = $api_instance->updateCourse($id, $body);
@@ -9378,7 +9480,7 @@ use WWW::SwaggerClient::DefaultApi;
 
 my $api_instance = WWW::SwaggerClient::DefaultApi->new();
 my $id = 56; # Integer | 
-my $body = WWW::SwaggerClient::Object::Course->new(); # Course | 
+my $body = WWW::SwaggerClient::Object::CourseCreate->new(); # CourseCreate | 
 
 eval { 
     my $result = $api_instance->updateCourse(id => $id, body => $body);
@@ -9399,7 +9501,7 @@ from pprint import pprint
 # create an instance of the API class
 api_instance = swagger_client.DefaultApi()
 id = 56 # Integer | 
-body =  # Course |  (optional)
+body =  # CourseCreate |  (optional)
 
 try: 
     # Update a course by ID
@@ -9456,7 +9558,7 @@ except ApiException as e:
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/Course"
+        "$ref" : "#/components/schemas/CourseCreate"
       }
     }
   }
@@ -9589,7 +9691,7 @@ public class DefaultApiExample {
         
         DefaultApi apiInstance = new DefaultApi();
         Integer id = 56; // Integer | 
-        CourseProfessor body = ; // CourseProfessor | 
+        CourseProfessorCreate body = ; // CourseProfessorCreate | 
         try {
             Response result = apiInstance.updateCourseProfessor(id, body);
             System.out.println(result);
@@ -9609,7 +9711,7 @@ public class DefaultApiExample {
     public static void main(String[] args) {
         DefaultApi apiInstance = new DefaultApi();
         Integer id = 56; // Integer | 
-        CourseProfessor body = ; // CourseProfessor | 
+        CourseProfessorCreate body = ; // CourseProfessorCreate | 
         try {
             Response result = apiInstance.updateCourseProfessor(id, body);
             System.out.println(result);
@@ -9626,7 +9728,7 @@ public class DefaultApiExample {
   </div> -->
                             <div class="tab-pane" id="examples-Default-updateCourseProfessor-0-objc">
                               <pre class="prettyprint"><code class="language-cpp">Integer *id = 56; // 
-CourseProfessor *body = ; //  (optional)
+CourseProfessorCreate *body = ; //  (optional)
 
 DefaultApi *apiInstance = [[DefaultApi alloc] init];
 
@@ -9650,7 +9752,7 @@ DefaultApi *apiInstance = [[DefaultApi alloc] init];
 var api = new AdminServiceApi.DefaultApi()
 var id = 56; // {{Integer}} 
 var opts = { 
-  'body':  // {{CourseProfessor}} 
+  'body':  // {{CourseProfessorCreate}} 
 };
 var callback = function(error, data, response) {
   if (error) {
@@ -9682,7 +9784,7 @@ namespace Example
 
             var apiInstance = new DefaultApi();
             var id = 56;  // Integer | 
-            var body = new CourseProfessor(); // CourseProfessor |  (optional) 
+            var body = new CourseProfessorCreate(); // CourseProfessorCreate |  (optional) 
 
             try
             {
@@ -9706,7 +9808,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 $api_instance = new Swagger\Client\ApiDefaultApi();
 $id = 56; // Integer | 
-$body = ; // CourseProfessor | 
+$body = ; // CourseProfessorCreate | 
 
 try {
     $result = $api_instance->updateCourseProfessor($id, $body);
@@ -9724,7 +9826,7 @@ use WWW::SwaggerClient::DefaultApi;
 
 my $api_instance = WWW::SwaggerClient::DefaultApi->new();
 my $id = 56; # Integer | 
-my $body = WWW::SwaggerClient::Object::CourseProfessor->new(); # CourseProfessor | 
+my $body = WWW::SwaggerClient::Object::CourseProfessorCreate->new(); # CourseProfessorCreate | 
 
 eval { 
     my $result = $api_instance->updateCourseProfessor(id => $id, body => $body);
@@ -9745,7 +9847,7 @@ from pprint import pprint
 # create an instance of the API class
 api_instance = swagger_client.DefaultApi()
 id = 56 # Integer | 
-body =  # CourseProfessor |  (optional)
+body =  # CourseProfessorCreate |  (optional)
 
 try: 
     # Update a course-professor relationship by ID
@@ -9802,7 +9904,7 @@ except ApiException as e:
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/CourseProfessor"
+        "$ref" : "#/components/schemas/CourseProfessorCreate"
       }
     }
   }
@@ -9935,7 +10037,7 @@ public class DefaultApiExample {
         
         DefaultApi apiInstance = new DefaultApi();
         Integer id = 56; // Integer | 
-        Department body = ; // Department | 
+        DepartmentCreate body = ; // DepartmentCreate | 
         try {
             Response result = apiInstance.updateDepartment(id, body);
             System.out.println(result);
@@ -9955,7 +10057,7 @@ public class DefaultApiExample {
     public static void main(String[] args) {
         DefaultApi apiInstance = new DefaultApi();
         Integer id = 56; // Integer | 
-        Department body = ; // Department | 
+        DepartmentCreate body = ; // DepartmentCreate | 
         try {
             Response result = apiInstance.updateDepartment(id, body);
             System.out.println(result);
@@ -9972,7 +10074,7 @@ public class DefaultApiExample {
   </div> -->
                             <div class="tab-pane" id="examples-Default-updateDepartment-0-objc">
                               <pre class="prettyprint"><code class="language-cpp">Integer *id = 56; // 
-Department *body = ; //  (optional)
+DepartmentCreate *body = ; //  (optional)
 
 DefaultApi *apiInstance = [[DefaultApi alloc] init];
 
@@ -9996,7 +10098,7 @@ DefaultApi *apiInstance = [[DefaultApi alloc] init];
 var api = new AdminServiceApi.DefaultApi()
 var id = 56; // {{Integer}} 
 var opts = { 
-  'body':  // {{Department}} 
+  'body':  // {{DepartmentCreate}} 
 };
 var callback = function(error, data, response) {
   if (error) {
@@ -10028,7 +10130,7 @@ namespace Example
 
             var apiInstance = new DefaultApi();
             var id = 56;  // Integer | 
-            var body = new Department(); // Department |  (optional) 
+            var body = new DepartmentCreate(); // DepartmentCreate |  (optional) 
 
             try
             {
@@ -10052,7 +10154,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 $api_instance = new Swagger\Client\ApiDefaultApi();
 $id = 56; // Integer | 
-$body = ; // Department | 
+$body = ; // DepartmentCreate | 
 
 try {
     $result = $api_instance->updateDepartment($id, $body);
@@ -10070,7 +10172,7 @@ use WWW::SwaggerClient::DefaultApi;
 
 my $api_instance = WWW::SwaggerClient::DefaultApi->new();
 my $id = 56; # Integer | 
-my $body = WWW::SwaggerClient::Object::Department->new(); # Department | 
+my $body = WWW::SwaggerClient::Object::DepartmentCreate->new(); # DepartmentCreate | 
 
 eval { 
     my $result = $api_instance->updateDepartment(id => $id, body => $body);
@@ -10091,7 +10193,7 @@ from pprint import pprint
 # create an instance of the API class
 api_instance = swagger_client.DefaultApi()
 id = 56 # Integer | 
-body =  # Department |  (optional)
+body =  # DepartmentCreate |  (optional)
 
 try: 
     # Update a department by ID
@@ -10148,7 +10250,7 @@ except ApiException as e:
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/Department"
+        "$ref" : "#/components/schemas/DepartmentCreate"
       }
     }
   }
@@ -10281,7 +10383,7 @@ public class DefaultApiExample {
         
         DefaultApi apiInstance = new DefaultApi();
         Integer id = 56; // Integer | 
-        Professor body = ; // Professor | 
+        ProfessorCreate body = ; // ProfessorCreate | 
         try {
             Response result = apiInstance.updateProfessor(id, body);
             System.out.println(result);
@@ -10301,7 +10403,7 @@ public class DefaultApiExample {
     public static void main(String[] args) {
         DefaultApi apiInstance = new DefaultApi();
         Integer id = 56; // Integer | 
-        Professor body = ; // Professor | 
+        ProfessorCreate body = ; // ProfessorCreate | 
         try {
             Response result = apiInstance.updateProfessor(id, body);
             System.out.println(result);
@@ -10318,7 +10420,7 @@ public class DefaultApiExample {
   </div> -->
                             <div class="tab-pane" id="examples-Default-updateProfessor-0-objc">
                               <pre class="prettyprint"><code class="language-cpp">Integer *id = 56; // 
-Professor *body = ; //  (optional)
+ProfessorCreate *body = ; //  (optional)
 
 DefaultApi *apiInstance = [[DefaultApi alloc] init];
 
@@ -10342,7 +10444,7 @@ DefaultApi *apiInstance = [[DefaultApi alloc] init];
 var api = new AdminServiceApi.DefaultApi()
 var id = 56; // {{Integer}} 
 var opts = { 
-  'body':  // {{Professor}} 
+  'body':  // {{ProfessorCreate}} 
 };
 var callback = function(error, data, response) {
   if (error) {
@@ -10374,7 +10476,7 @@ namespace Example
 
             var apiInstance = new DefaultApi();
             var id = 56;  // Integer | 
-            var body = new Professor(); // Professor |  (optional) 
+            var body = new ProfessorCreate(); // ProfessorCreate |  (optional) 
 
             try
             {
@@ -10398,7 +10500,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 $api_instance = new Swagger\Client\ApiDefaultApi();
 $id = 56; // Integer | 
-$body = ; // Professor | 
+$body = ; // ProfessorCreate | 
 
 try {
     $result = $api_instance->updateProfessor($id, $body);
@@ -10416,7 +10518,7 @@ use WWW::SwaggerClient::DefaultApi;
 
 my $api_instance = WWW::SwaggerClient::DefaultApi->new();
 my $id = 56; # Integer | 
-my $body = WWW::SwaggerClient::Object::Professor->new(); # Professor | 
+my $body = WWW::SwaggerClient::Object::ProfessorCreate->new(); # ProfessorCreate | 
 
 eval { 
     my $result = $api_instance->updateProfessor(id => $id, body => $body);
@@ -10437,7 +10539,7 @@ from pprint import pprint
 # create an instance of the API class
 api_instance = swagger_client.DefaultApi()
 id = 56 # Integer | 
-body =  # Professor |  (optional)
+body =  # ProfessorCreate |  (optional)
 
 try: 
     # Update a professor by ID
@@ -10494,7 +10596,7 @@ except ApiException as e:
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/Professor"
+        "$ref" : "#/components/schemas/ProfessorCreate"
       }
     }
   }
@@ -10627,7 +10729,7 @@ public class DefaultApiExample {
         
         DefaultApi apiInstance = new DefaultApi();
         Integer id = 56; // Integer | 
-        Room body = ; // Room | 
+        RoomCreate body = ; // RoomCreate | 
         try {
             Response result = apiInstance.updateRoom(id, body);
             System.out.println(result);
@@ -10647,7 +10749,7 @@ public class DefaultApiExample {
     public static void main(String[] args) {
         DefaultApi apiInstance = new DefaultApi();
         Integer id = 56; // Integer | 
-        Room body = ; // Room | 
+        RoomCreate body = ; // RoomCreate | 
         try {
             Response result = apiInstance.updateRoom(id, body);
             System.out.println(result);
@@ -10664,7 +10766,7 @@ public class DefaultApiExample {
   </div> -->
                             <div class="tab-pane" id="examples-Default-updateRoom-0-objc">
                               <pre class="prettyprint"><code class="language-cpp">Integer *id = 56; // 
-Room *body = ; //  (optional)
+RoomCreate *body = ; //  (optional)
 
 DefaultApi *apiInstance = [[DefaultApi alloc] init];
 
@@ -10688,7 +10790,7 @@ DefaultApi *apiInstance = [[DefaultApi alloc] init];
 var api = new AdminServiceApi.DefaultApi()
 var id = 56; // {{Integer}} 
 var opts = { 
-  'body':  // {{Room}} 
+  'body':  // {{RoomCreate}} 
 };
 var callback = function(error, data, response) {
   if (error) {
@@ -10720,7 +10822,7 @@ namespace Example
 
             var apiInstance = new DefaultApi();
             var id = 56;  // Integer | 
-            var body = new Room(); // Room |  (optional) 
+            var body = new RoomCreate(); // RoomCreate |  (optional) 
 
             try
             {
@@ -10744,7 +10846,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 $api_instance = new Swagger\Client\ApiDefaultApi();
 $id = 56; // Integer | 
-$body = ; // Room | 
+$body = ; // RoomCreate | 
 
 try {
     $result = $api_instance->updateRoom($id, $body);
@@ -10762,7 +10864,7 @@ use WWW::SwaggerClient::DefaultApi;
 
 my $api_instance = WWW::SwaggerClient::DefaultApi->new();
 my $id = 56; # Integer | 
-my $body = WWW::SwaggerClient::Object::Room->new(); # Room | 
+my $body = WWW::SwaggerClient::Object::RoomCreate->new(); # RoomCreate | 
 
 eval { 
     my $result = $api_instance->updateRoom(id => $id, body => $body);
@@ -10783,7 +10885,7 @@ from pprint import pprint
 # create an instance of the API class
 api_instance = swagger_client.DefaultApi()
 id = 56 # Integer | 
-body =  # Room |  (optional)
+body =  # RoomCreate |  (optional)
 
 try: 
     # Update a room by ID
@@ -10840,7 +10942,7 @@ except ApiException as e:
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/Room"
+        "$ref" : "#/components/schemas/RoomCreate"
       }
     }
   }
@@ -10973,7 +11075,7 @@ public class DefaultApiExample {
         
         DefaultApi apiInstance = new DefaultApi();
         Integer id = 56; // Integer | 
-        Semester body = ; // Semester | 
+        SemesterCreate body = ; // SemesterCreate | 
         try {
             Response result = apiInstance.updateSemester(id, body);
             System.out.println(result);
@@ -10993,7 +11095,7 @@ public class DefaultApiExample {
     public static void main(String[] args) {
         DefaultApi apiInstance = new DefaultApi();
         Integer id = 56; // Integer | 
-        Semester body = ; // Semester | 
+        SemesterCreate body = ; // SemesterCreate | 
         try {
             Response result = apiInstance.updateSemester(id, body);
             System.out.println(result);
@@ -11010,7 +11112,7 @@ public class DefaultApiExample {
   </div> -->
                             <div class="tab-pane" id="examples-Default-updateSemester-0-objc">
                               <pre class="prettyprint"><code class="language-cpp">Integer *id = 56; // 
-Semester *body = ; //  (optional)
+SemesterCreate *body = ; //  (optional)
 
 DefaultApi *apiInstance = [[DefaultApi alloc] init];
 
@@ -11034,7 +11136,7 @@ DefaultApi *apiInstance = [[DefaultApi alloc] init];
 var api = new AdminServiceApi.DefaultApi()
 var id = 56; // {{Integer}} 
 var opts = { 
-  'body':  // {{Semester}} 
+  'body':  // {{SemesterCreate}} 
 };
 var callback = function(error, data, response) {
   if (error) {
@@ -11066,7 +11168,7 @@ namespace Example
 
             var apiInstance = new DefaultApi();
             var id = 56;  // Integer | 
-            var body = new Semester(); // Semester |  (optional) 
+            var body = new SemesterCreate(); // SemesterCreate |  (optional) 
 
             try
             {
@@ -11090,7 +11192,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 $api_instance = new Swagger\Client\ApiDefaultApi();
 $id = 56; // Integer | 
-$body = ; // Semester | 
+$body = ; // SemesterCreate | 
 
 try {
     $result = $api_instance->updateSemester($id, $body);
@@ -11108,7 +11210,7 @@ use WWW::SwaggerClient::DefaultApi;
 
 my $api_instance = WWW::SwaggerClient::DefaultApi->new();
 my $id = 56; # Integer | 
-my $body = WWW::SwaggerClient::Object::Semester->new(); # Semester | 
+my $body = WWW::SwaggerClient::Object::SemesterCreate->new(); # SemesterCreate | 
 
 eval { 
     my $result = $api_instance->updateSemester(id => $id, body => $body);
@@ -11129,7 +11231,7 @@ from pprint import pprint
 # create an instance of the API class
 api_instance = swagger_client.DefaultApi()
 id = 56 # Integer | 
-body =  # Semester |  (optional)
+body =  # SemesterCreate |  (optional)
 
 try: 
     # Update a semester by ID
@@ -11186,7 +11288,7 @@ except ApiException as e:
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/Semester"
+        "$ref" : "#/components/schemas/SemesterCreate"
       }
     }
   }
