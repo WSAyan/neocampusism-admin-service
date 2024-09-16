@@ -399,6 +399,110 @@ paths:
         '204':
           description: Course deleted
 
+  /semesterCourses:
+    post:
+      summary: "Create a new SemesterCourse"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SemesterCourse'
+      responses:
+        "201":
+          description: "SemesterCourse created successfully"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        "400":
+          description: "Invalid input"
+
+    get:
+      summary: "Get all SemesterCourses"
+      responses:
+        "200":
+          description: "List of all SemesterCourses"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SemesterCourse'
+        "404":
+          description: "No SemesterCourses found"
+
+  /semesterCourses/{id}:
+    get:
+      summary: "Get a SemesterCourse by ID"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: "SemesterCourse ID"
+      responses:
+        "200":
+          description: "Details of a specific SemesterCourse"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SemesterCourse'
+        "400":
+          description: "Invalid SemesterCourse ID"
+        "404":
+          description: "SemesterCourse not found"
+
+    put:
+      summary: "Update a SemesterCourse by ID"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: "SemesterCourse ID"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SemesterCourse'
+      responses:
+        "200":
+          description: "SemesterCourse updated successfully"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        "400":
+          description: "Invalid SemesterCourse ID"
+        "404":
+          description: "SemesterCourse not found"
+
+    delete:
+      summary: "Delete a SemesterCourse by ID"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: "SemesterCourse ID"
+      responses:
+        "200":
+          description: "SemesterCourse deleted successfully"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        "400":
+          description: "Invalid SemesterCourse ID"
+        "404":
+          description: "SemesterCourse not found"
+
+
   /courseProfessors:
     post:
       summary: Create a new course-professor relationship
@@ -490,60 +594,99 @@ components:
         data:
           type: object
 
-    CourseProfessor:
-      type: object
-      properties:
-        courseId:
-          type: integer
-        professorId:
-          type: integer
-
     Course:
       type: object
       properties:
-        id:
+        courseID:
           type: integer
-        name:
+        courseName:
           type: string
-        description:
+        courseCode:
           type: string
+        departmentID:
+          type: integer
+        credits:
+          type: integer
+        courseType:
+          type: string
+          enum: [ ONLINE, OFFLINE ]
+
+    CourseProfessor:
+      type: object
+      properties:
+        courseProfessorID:
+          type: integer
+        course:
+          $ref: '#/components/schemas/Course'
+        professor:
+          $ref: '#/components/schemas/Professor'
 
     Department:
       type: object
       properties:
-        id:
+        departmentID:
           type: integer
-        name:
+        departmentName:
           type: string
-        code:
+        departmentCode:
           type: string
 
     Professor:
       type: object
       properties:
-        id:
+        professorID:
           type: integer
-        name:
+        firstName:
           type: string
-        departmentId:
+        lastName:
+          type: string
+        shortName:
+          type: string
+        departmentID:
           type: integer
+        email:
+          type: string
+        phone:
+          type: string
+        courses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Course'
 
     Room:
       type: object
       properties:
-        id:
+        roomID:
           type: integer
-        number:
+        roomNumber:
           type: string
         capacity:
           type: integer
+        roomType:
+          type: string
+          enum: [ LECTURE, LAB ]
 
     Semester:
       type: object
       properties:
-        id:
+        semesterID:
           type: integer
-        term:
+        semesterName:
           type: string
-        year:
+        semesterCode:
+          type: string
+        courses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Course'
+
+    SemesterCourse:
+      type: object
+      properties:
+        semesterCourseID:
           type: integer
+        semester:
+          $ref: '#/components/schemas/Semester'
+        course:
+          $ref: '#/components/schemas/Course'
+
