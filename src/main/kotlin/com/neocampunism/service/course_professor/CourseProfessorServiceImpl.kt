@@ -21,7 +21,7 @@ class CourseProfessorServiceImpl(val courseProfessorRepository: CourseProfessorR
         return ApiResponse(
             status = "success",
             message = "Course Professors retrieved",
-            data = mapOf("rooms" to courseProfessorRepository.getAllCourseProfessors())
+            data = mapOf("courseProfessors" to courseProfessorRepository.getAllCourseProfessors())
         )
     }
 
