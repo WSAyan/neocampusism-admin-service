@@ -10,28 +10,6 @@ servers:
 
 paths:
   /departments:
-    get:
-      summary: Get all departments
-      operationId: getDepartments
-      responses:
-        '200':
-          description: List of departments
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: string
-                  message:
-                    type: string
-                  data:
-                    type: object
-                    properties:
-                      departments:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/Department'
     post:
       summary: Create a new department
       operationId: createDepartment
@@ -39,10 +17,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DepartmentCreateRequest'
+              $ref: '#/components/schemas/Department'
       responses:
         '201':
           description: Department created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+    get:
+      summary: Get all departments
+      operationId: getDepartments
+      responses:
+        '200':
+          description: List of departments
           content:
             application/json:
               schema:
@@ -78,7 +66,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DepartmentCreateRequest'
+              $ref: '#/components/schemas/Department'
       responses:
         '200':
           description: Department updated
@@ -99,299 +87,7 @@ paths:
         '204':
           description: Department deleted
 
-  /professors:
-    get:
-      summary: Get all professors
-      operationId: getProfessors
-      responses:
-        '200':
-          description: List of professors
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: string
-                  message:
-                    type: string
-                  data:
-                    type: object
-                    properties:
-                      professors:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/Professor'
-    post:
-      summary: Create a new professor
-      operationId: createProfessor
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ProfessorCreateRequest'
-      responses:
-        '201':
-          description: Professor created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Response'
-
-  /professors/{id}:
-    get:
-      summary: Get a professor by ID
-      operationId: getProfessorById
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: Professor details
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Response'
-    put:
-      summary: Update a professor by ID
-      operationId: updateProfessor
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ProfessorCreateRequest'
-      responses:
-        '200':
-          description: Professor updated
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Response'
-    delete:
-      summary: Delete a professor by ID
-      operationId: deleteProfessor
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-      responses:
-        '204':
-          description: Professor deleted
-
-  /courses:
-    get:
-      summary: Get all courses
-      operationId: getCourses
-      responses:
-        '200':
-          description: List of courses
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: string
-                  message:
-                    type: string
-                  data:
-                    type: object
-                    properties:
-                      courses:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/Course'
-    post:
-      summary: Create a new course
-      operationId: createCourse
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CourseCreateRequest'
-      responses:
-        '201':
-          description: Course created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Response'
-
-  /courses/{id}:
-    get:
-      summary: Get a course by ID
-      operationId: getCourseById
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: Course details
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Response'
-    put:
-      summary: Update a course by ID
-      operationId: updateCourse
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CourseCreateRequest'
-      responses:
-        '200':
-          description: Course updated
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Response'
-    delete:
-      summary: Delete a course by ID
-      operationId: deleteCourse
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-      responses:
-        '204':
-          description: Course deleted
-
-  /timeSlots:
-    get:
-      summary: Get all time slots
-      operationId: getTimeSlots
-      responses:
-        '200':
-          description: List of time slots
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: string
-                  message:
-                    type: string
-                  data:
-                    type: object
-                    properties:
-                      timeSlots:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/TimeSlot'
-    post:
-      summary: Create a new time slot
-      operationId: createTimeSlot
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/TimeSlotCreateRequest'
-      responses:
-        '201':
-          description: Time slot created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Response'
-
-  /timeSlots/{id}:
-    get:
-      summary: Get a time slot by ID
-      operationId: getTimeSlotById
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: Time slot details
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Response'
-    put:
-      summary: Update a time slot by ID
-      operationId: updateTimeSlot
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/TimeSlotCreateRequest'
-      responses:
-        '200':
-          description: Time slot updated
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Response'
-    delete:
-      summary: Delete a time slot by ID
-      operationId: deleteTimeSlot
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-      responses:
-        '204':
-          description: Time slot deleted
-
   /rooms:
-    get:
-      summary: Get all rooms
-      operationId: getRooms
-      responses:
-        '200':
-          description: List of rooms
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: string
-                  message:
-                    type: string
-                  data:
-                    type: object
-                    properties:
-                      rooms:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/Room'
     post:
       summary: Create a new room
       operationId: createRoom
@@ -399,10 +95,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RoomCreateRequest'
+              $ref: '#/components/schemas/Room'
       responses:
         '201':
           description: Room created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+    get:
+      summary: Get all rooms
+      operationId: getRooms
+      responses:
+        '200':
+          description: List of rooms
           content:
             application/json:
               schema:
@@ -438,7 +144,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RoomCreateRequest'
+              $ref: '#/components/schemas/Room'
       responses:
         '200':
           description: Room updated
@@ -459,101 +165,321 @@ paths:
         '204':
           description: Room deleted
 
+  /professors:
+    post:
+      summary: Create a new professor
+      operationId: createProfessor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Professor'
+      responses:
+        '201':
+          description: Professor created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+    get:
+      summary: Get all professors
+      operationId: getProfessors
+      responses:
+        '200':
+          description: List of professors
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+
+  /professors/{id}:
+    get:
+      summary: Get a professor by ID
+      operationId: getProfessorById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Professor details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+    put:
+      summary: Update a professor by ID
+      operationId: updateProfessor
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Professor'
+      responses:
+        '200':
+          description: Professor updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+    delete:
+      summary: Delete a professor by ID
+      operationId: deleteProfessor
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Professor deleted
+
+  /semesters:
+    post:
+      summary: Create a new semester
+      operationId: createSemester
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Semester'
+      responses:
+        '201':
+          description: Semester created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+    get:
+      summary: Get all semesters
+      operationId: getSemesters
+      responses:
+        '200':
+          description: List of semesters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+
+  /semesters/{id}:
+    get:
+      summary: Get a semester by ID
+      operationId: getSemesterById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Semester details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+    put:
+      summary: Update a semester by ID
+      operationId: updateSemester
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Semester'
+      responses:
+        '200':
+          description: Semester updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+    delete:
+      summary: Delete a semester by ID
+      operationId: deleteSemester
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Semester deleted
+
+  /courses:
+    post:
+      summary: Create a new course
+      operationId: createCourse
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Course'
+      responses:
+        '201':
+          description: Course created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+    get:
+      summary: Get all courses
+      operationId: getCourses
+      responses:
+        '200':
+          description: List of courses
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+
+  /courses/{id}:
+    get:
+      summary: Get a course by ID
+      operationId: getCourseById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Course details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+    put:
+      summary: Update a course by ID
+      operationId: updateCourse
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Course'
+      responses:
+        '200':
+          description: Course updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+    delete:
+      summary: Delete a course by ID
+      operationId: deleteCourse
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Course deleted
+
+  /courseProfessors:
+    post:
+      summary: Create a new course-professor relationship
+      operationId: createCourseProfessor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CourseProfessor'
+      responses:
+        '201':
+          description: Course-Professor relationship created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+    get:
+      summary: Get all course-professor relationships
+      operationId: getCourseProfessors
+      responses:
+        '200':
+          description: List of course-professor relationships
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+
+  /courseProfessors/{id}:
+    get:
+      summary: Get a course-professor relationship by ID
+      operationId: getCourseProfessorById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Course-Professor relationship details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+    put:
+      summary: Update a course-professor relationship by ID
+      operationId: updateCourseProfessor
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CourseProfessor'
+      responses:
+        '200':
+          description: Course-Professor relationship updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+    delete:
+      summary: Delete a course-professor relationship by ID
+      operationId: deleteCourseProfessor
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Course-Professor relationship deleted
+
+
 components:
   schemas:
-    Department:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-    DepartmentCreateRequest:
-      type: object
-      properties:
-        departmentName:
-          type: string
-          example: "Computer Science"
-        departmentCode:
-          type: string
-          example: "CSE"
-    Professor:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-    ProfessorCreateRequest:
-      type: object
-      properties:
-        firstName:
-          type: string
-          example: "Dr. Smith"
-        lastName:
-          type: string
-          example: "Dr. Smith"
-    Course:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-    CourseCreateRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          example: "Algorithms"
-    TimeSlot:
-      type: object
-      properties:
-        id:
-          type: integer
-        startTime:
-          type: string
-          format: time
-        endTime:
-          type: string
-          format: time
-        dayOfWeek:
-          type: string
-    TimeSlotCreateRequest:
-      type: object
-      properties:
-        startTime:
-          type: string
-          example: "08:00"
-        endTime:
-          type: string
-          example: "10:00"
-        dayOfWeek:
-          type: string
-          example: "Monday"
-    Room:
-      type: object
-      properties:
-        id:
-          type: integer
-        roomNumber:
-          type: string
-        building:
-          type: string
-        capacity:
-          type: integer
-    RoomCreateRequest:
-      type: object
-      properties:
-        roomNumber:
-          type: string
-          example: "101"
-        building:
-          type: string
-          example: "Main"
-        capacity:
-          type: integer
-          example: 30
     Response:
       type: object
       properties:
@@ -563,3 +489,61 @@ components:
           type: string
         data:
           type: object
+
+    CourseProfessor:
+      type: object
+      properties:
+        courseId:
+          type: integer
+        professorId:
+          type: integer
+
+    Course:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+
+    Department:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        code:
+          type: string
+
+    Professor:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        departmentId:
+          type: integer
+
+    Room:
+      type: object
+      properties:
+        id:
+          type: integer
+        number:
+          type: string
+        capacity:
+          type: integer
+
+    Semester:
+      type: object
+      properties:
+        id:
+          type: integer
+        term:
+          type: string
+        year:
+          type: integer
