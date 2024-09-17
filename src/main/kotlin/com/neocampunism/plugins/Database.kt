@@ -1,6 +1,7 @@
 package com.neocampunism.plugins
 
 
+import com.neocampunism.db.basex.BaseXDB
 import com.neocampunism.db.connectDBServer
 import com.neocampunism.db.createTables
 import io.ktor.server.application.*
@@ -24,4 +25,8 @@ fun Application.configureDatabases(config: ApplicationConfig) {
 
         createTables(schema)
     }
+}
+
+fun Application.configureBasexDb(config: ApplicationConfig) {
+    BaseXDB.start()
 }
