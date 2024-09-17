@@ -1,6 +1,7 @@
 package com.neocampunism.db
 
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.Schema
 import org.jetbrains.exposed.sql.SchemaUtils
@@ -10,19 +11,37 @@ import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransacti
 suspend fun <T> suspendTransaction(block: Transaction.() -> T): T =
     newSuspendedTransaction(Dispatchers.IO, statement = block)
 
-fun connectDBServer(
+suspend fun connectDBServer(
     url: String,
     driver: String,
     user: String,
     password: String,
-    schema: String = ""
-) =
-    Database.connect(
-        url = "$url/$schema",
-        driver = driver,
-        user = user,
-        password = password,
-    )
+) : Boolean {
+    repeat(5) { attempt ->
+        println("connecting to database $url.......")
+
+        try {
+            Database.connect(
+                url = url,
+                driver = driver,
+                user = user,
+                password = password,
+            )
+
+            println("Database connected successfully.")
+
+            return true
+        } catch (e: Exception) {
+            println("Database connection failed. Attempt ${attempt + 1} of 5.")
+            if (attempt + 1 == 5) {
+                println("Max retries reached. Cannot connect to the database.")
+                return false
+            }
+            delay(500L)
+        }
+    }
+    return false
+}
 
 suspend fun createSchema(schema: String) {
     suspendTransaction {

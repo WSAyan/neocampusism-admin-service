@@ -3,11 +3,10 @@ ktor:
     modules:
       - com.neocampunism.ApplicationKt.module
   deployment:
-    host: 127.0.0.1
     port: 8080
 storage:
   driverClassName: "com.mysql.cj.jdbc.Driver"
-  jdbcURL: "jdbc:mysql://localhost:3306"
+  jdbcURL: "jdbc:mysql://db:3306/nc_admin"
   user: "root"
   password: ""
   schema: "nc_admin"
