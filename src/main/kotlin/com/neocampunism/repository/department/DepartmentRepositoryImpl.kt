@@ -1,9 +1,9 @@
 package com.neocampunism.repository.department
 
-import com.neocampunism.db.Departments
-import com.neocampunism.db.dao.DepartmentDao
-import com.neocampunism.db.dao.daoToModel
-import com.neocampunism.db.suspendTransaction
+import com.neocampunism.db.sql.Departments
+import com.neocampunism.db.sql.dao.DepartmentDao
+import com.neocampunism.db.sql.dao.daoToModel
+import com.neocampunism.db.sql.suspendTransaction
 import com.neocampunism.model.Department
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.deleteWhere

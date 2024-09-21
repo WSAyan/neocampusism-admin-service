@@ -1,11 +1,11 @@
 package com.neocampunism.repository.room
 
-import com.neocampunism.db.*
-import com.neocampunism.db.dao.ProfessorDao
-import com.neocampunism.db.dao.RoomDao
-import com.neocampunism.db.dao.daoToModel
+import com.neocampunism.db.sql.RoomType
+import com.neocampunism.db.sql.Rooms
+import com.neocampunism.db.sql.dao.RoomDao
+import com.neocampunism.db.sql.dao.daoToModel
+import com.neocampunism.db.sql.suspendTransaction
 import com.neocampunism.model.Room
-import org.jetbrains.exposed.dao.id.EntityID
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.deleteWhere
 

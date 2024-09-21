@@ -1,10 +1,10 @@
 package com.neocampunism.repository.semester
 
-import com.neocampunism.db.Semesters
-import com.neocampunism.db.SemestersCourses
-import com.neocampunism.db.dao.SemesterDao
-import com.neocampunism.db.dao.daoToModel
-import com.neocampunism.db.suspendTransaction
+import com.neocampunism.db.sql.Semesters
+import com.neocampunism.db.sql.SemestersCourses
+import com.neocampunism.db.sql.dao.SemesterDao
+import com.neocampunism.db.sql.dao.daoToModel
+import com.neocampunism.db.sql.suspendTransaction
 import com.neocampunism.model.Semester
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.deleteWhere

@@ -1,9 +1,10 @@
 package com.neocampunism.repository.professor
 
-import com.neocampunism.db.*
-import com.neocampunism.db.dao.CourseDao
-import com.neocampunism.db.dao.ProfessorDao
-import com.neocampunism.db.dao.daoToModel
+import com.neocampunism.db.sql.Departments
+import com.neocampunism.db.sql.Professors
+import com.neocampunism.db.sql.dao.ProfessorDao
+import com.neocampunism.db.sql.dao.daoToModel
+import com.neocampunism.db.sql.suspendTransaction
 import com.neocampunism.model.Professor
 import org.jetbrains.exposed.dao.id.EntityID
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq

@@ -1,6 +1,6 @@
-package com.neocampunism.db.dao
+package com.neocampunism.db.sql.dao
 
-import com.neocampunism.db.Rooms
+import com.neocampunism.db.sql.Rooms
 import com.neocampunism.model.Room
 import com.neocampunism.model.RoomType
 import org.jetbrains.exposed.dao.IntEntity

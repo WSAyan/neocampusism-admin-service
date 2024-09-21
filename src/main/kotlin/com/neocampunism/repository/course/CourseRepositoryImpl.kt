@@ -1,15 +1,12 @@
 package com.neocampunism.repository.course
 
-import com.neocampunism.db.*
-import com.neocampunism.db.dao.CourseDao
-import com.neocampunism.db.dao.daoToModel
+import com.neocampunism.db.sql.*
+import com.neocampunism.db.sql.dao.CourseDao
+import com.neocampunism.db.sql.dao.daoToModel
 import com.neocampunism.model.Course
 import org.jetbrains.exposed.dao.id.EntityID
-import org.jetbrains.exposed.sql.Op
-import org.jetbrains.exposed.sql.SqlExpressionBuilder
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.deleteWhere
-import org.jetbrains.exposed.sql.select
 
 class CourseRepositoryImpl : CourseRepository {
     override suspend fun addCourse(course: Course): Course? = suspendTransaction {

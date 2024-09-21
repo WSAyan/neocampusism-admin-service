@@ -1,6 +1,6 @@
-package com.neocampunism.db.dao
+package com.neocampunism.db.sql.dao
 
-import com.neocampunism.db.TimeSlots
+import com.neocampunism.db.sql.TimeSlots
 import com.neocampunism.model.DayOfWeek
 import com.neocampunism.model.TimeSlot
 import org.jetbrains.exposed.dao.IntEntity

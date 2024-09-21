@@ -2,8 +2,8 @@ package com.neocampunism.plugins
 
 
 import com.neocampunism.db.basex.BaseXDB
-import com.neocampunism.db.connectDBServer
-import com.neocampunism.db.createTables
+import com.neocampunism.db.sql.connectDBServer
+import com.neocampunism.db.sql.createTables
 import io.ktor.server.application.*
 import io.ktor.server.config.*
 import kotlinx.coroutines.launch

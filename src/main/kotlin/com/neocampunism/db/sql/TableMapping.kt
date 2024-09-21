@@ -1,4 +1,4 @@
-package com.neocampunism.db
+package com.neocampunism.db.sql
 
 import org.jetbrains.exposed.dao.id.IntIdTable
 import org.jetbrains.exposed.sql.jodatime.time

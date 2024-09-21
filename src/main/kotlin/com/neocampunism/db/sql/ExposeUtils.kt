@@ -1,4 +1,4 @@
-package com.neocampunism.db
+package com.neocampunism.db.sql
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay

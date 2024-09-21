@@ -1,6 +1,6 @@
-package com.neocampunism.db.dao
+package com.neocampunism.db.sql.dao
 
-import com.neocampunism.db.CourseProfessors
+import com.neocampunism.db.sql.CourseProfessors
 import com.neocampunism.model.CourseProfessor
 import org.jetbrains.exposed.dao.IntEntity
 import org.jetbrains.exposed.dao.IntEntityClass

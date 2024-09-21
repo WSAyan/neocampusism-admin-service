@@ -1,14 +1,12 @@
-package com.neocampunism.db.dao
+package com.neocampunism.db.sql.dao
 
-import com.neocampunism.db.CourseProfessors
-import com.neocampunism.db.Courses
-import com.neocampunism.db.Professors
-import com.neocampunism.db.SemestersCourses
+import com.neocampunism.db.sql.CourseProfessors
+import com.neocampunism.db.sql.Courses
+import com.neocampunism.db.sql.Professors
 import com.neocampunism.model.Professor
 import org.jetbrains.exposed.dao.IntEntity
 import org.jetbrains.exposed.dao.IntEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
-import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 
 class ProfessorDao(id: EntityID<Int>) : IntEntity(id) {
     companion object : IntEntityClass<ProfessorDao>(Professors)

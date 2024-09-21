@@ -1,6 +1,6 @@
-package com.neocampunism.db.dao
+package com.neocampunism.db.sql.dao
 
-import com.neocampunism.db.Schedules
+import com.neocampunism.db.sql.Schedules
 import com.neocampunism.model.Schedule
 import org.jetbrains.exposed.dao.IntEntity
 import org.jetbrains.exposed.dao.IntEntityClass
