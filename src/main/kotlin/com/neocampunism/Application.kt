@@ -12,5 +12,4 @@ fun Application.module() {
     configureSerialization()
     configureRouting()
     configureDatabases(environment.config)
-    configureBasexDb(environment.config)
 }

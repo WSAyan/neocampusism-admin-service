@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<syllabus name="syl1">
+    <effectiveFrom>2018</effectiveFrom>
+    <effectiveTo>2022</effectiveTo>
+    <syllabusType>undergrad</syllabusType>
+    <courseTypes/>
+    <year id="1">
+        <semester id="1">
+            <course courseCode="CSE 100">
+                <semesterId>1</semesterId>
+                <yearId>1</yearId>
+            </course>
+            <course courseCode="CSE 101">
+                <semesterId>1</semesterId>
+                <yearId>1</yearId>
+            </course>
+            <course courseCode="CSE 102">
+                <semesterId>1</semesterId>
+                <yearId>1</yearId>
+            </course>
+        </semester>
+        <semester id="2">
+            <course courseCode="CSE 200">
+                <semesterId>2</semesterId>
+                <yearId>1</yearId>
+            </course>
+            <course courseCode="CSE 201">
+                <semesterId>2</semesterId>
+                <yearId>1</yearId>
+            </course>
+            <course courseCode="CSE 202">
+                <semesterId>2</semesterId>
+                <yearId>1</yearId>
+            </course>
+        </semester>
+    </year>
+    <year id="2">
+        <semester id="1"/>
+        <semester id="2"/>
+    </year>
+    <year id="3">
+        <semester id="1"/>
+        <semester id="2"/>
+    </year>
+    <year id="4">
+        <semester id="1"/>
+        <semester id="2"/>
+    </year>
+</syllabus>
