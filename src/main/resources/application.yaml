@@ -5,11 +5,14 @@ ktor:
   deployment:
     port: 8080
 storage:
-  driverClassName: "com.mysql.cj.jdbc.Driver"
-  jdbcURL: "jdbc:mysql://db:3306/nc_admin"
+  type: "mysql"
   user: "root"
   password: ""
   schema: "nc_admin"
+  host: "localhost"
+  port: 3306
+  driverClassName: "com.mysql.cj.jdbc.Driver"
+  jdbcURL: "jdbc:mysql://"
 jwt:
   domain: "https://jwt-provider-domain/"
   audience: "jwt-audience"
