@@ -5,12 +5,12 @@ ktor:
   deployment:
     port: 8080
 storage:
-  type: "mysql"
-  user: "root"
-  password: ""
+  type: "basex"
+  user: "admin"
+  password: "admin"
   schema: "nc_admin"
   host: "localhost"
-  port: 3306
+  port: 1984
   driverClassName: "com.mysql.cj.jdbc.Driver"
   jdbcURL: "jdbc:mysql://"
 jwt:

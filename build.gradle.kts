@@ -50,4 +50,6 @@ dependencies {
     implementation("com.zaxxer:HikariCP:$hikaricp_version")
 
     implementation("org.basex:basex:9.7.4")
+
+    implementation("io.ktor:ktor-serialization-kotlinx-xml:$ktor_version")
 }
