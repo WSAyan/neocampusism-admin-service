@@ -11,6 +11,7 @@ import io.ktor.server.response.*
 
 fun Application.configureExceptionHandling() {
     install(StatusPages) {
+
         exception<Throwable> { call, cause ->
             when (cause) {
                 is NotFoundException -> {
@@ -26,7 +27,8 @@ fun Application.configureExceptionHandling() {
 
                 is BadRequestException -> {
                     call.respond(
-                        HttpStatusCode.BadRequest, ApiResponse(
+                        HttpStatusCode.BadRequest,
+                        ApiResponse(
                             status = "failed",
                             message = "Invalid request",
                             data = ErrorBody(cause = cause.localizedMessage)
@@ -47,6 +49,40 @@ fun Application.configureExceptionHandling() {
                     logError(call, cause)
                 }
             }
+        }
+
+
+        status(HttpStatusCode.NotFound) { status ->
+            call.respond(
+                status,
+                ApiResponse(
+                    status = "failed",
+                    message = "Resource not found",
+                    data = ErrorBody(cause = status.description)
+                )
+            )
+        }
+
+        status(HttpStatusCode.Unauthorized) { status ->
+            call.respond(
+                status,
+                ApiResponse(
+                    status = "failed",
+                    message = "Unauthorized",
+                    data = ErrorBody(cause = status.description)
+                )
+            )
+        }
+
+        status(HttpStatusCode.MethodNotAllowed) { status ->
+            call.respond(
+                status,
+                ApiResponse(
+                    status = "failed",
+                    message = "Method not allowed",
+                    data = ErrorBody(cause = status.description)
+                )
+            )
         }
     }
 }
