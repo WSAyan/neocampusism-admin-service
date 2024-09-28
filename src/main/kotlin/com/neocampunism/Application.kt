@@ -12,5 +12,6 @@ fun Application.module() {
     configureSecurity()
     configureSerialization()
     configureRouting()
-    configureDatabases(environment.config)
+    configureMySql(environment.config)
+    configureBaseX(environment.config)
 }

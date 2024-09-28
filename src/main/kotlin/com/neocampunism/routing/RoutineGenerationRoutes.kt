@@ -11,7 +11,7 @@ import io.ktor.server.routing.*
 fun Route.routineGeneratorRoutes() {
     route("/routines") {
 
-        post("/generate") {
+        get("/generate") {
             val genes: List<Gene> = listOf(
                 Gene("CSE-203", "EI", "2-1", 1, true),
                 Gene("CSE-205", "NAR", "2-1", 1, false),
@@ -39,7 +39,7 @@ fun Route.routineGeneratorRoutes() {
                 HttpStatusCode.OK,
                 ApiResponse(
                     status = "success",
-                    message = "Room created",
+                    message = "Routine generated",
                     data = "yey"
                 )
             )
