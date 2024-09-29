@@ -1,0 +1,8 @@
+<ul>
+    <li *ngFor="let department of departments">
+        {{ department.departmentName }} - {{ department.departmentCode }}
+        <a [routerLink]="['/departments/edit', department.departmentID]">Edit</a>
+        <button (click)="deleteDepartment(department.departmentID)">Delete</button>
+    </li>
+</ul>
+<a routerLink="/product/create">Create New Department</a>
