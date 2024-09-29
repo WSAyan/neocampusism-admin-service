@@ -30,46 +30,6 @@ import io.ktor.server.routing.*
 
 fun Application.configureRouting() {
     routing {
-        install(StatusPages) {
-            exception<Throwable> { call, cause ->
-                when (cause) {
-                    is NotFoundException -> {
-                        call.respond(
-                            HttpStatusCode.NotFound,
-                            ApiResponse(
-                                status = "failed",
-                                message = "Resource not found",
-                                data = ErrorBody(cause = cause.localizedMessage)
-                            )
-                        )
-                    }
-
-                    is BadRequestException -> {
-                        call.respond(
-                            HttpStatusCode.BadRequest, ApiResponse(
-                                status = "failed",
-                                message = "Invalid request",
-                                data = ErrorBody(cause = cause.localizedMessage)
-                            )
-                        )
-                    }
-
-                    else -> {
-                        call.respond(
-                            HttpStatusCode.InternalServerError,
-                            ApiResponse(
-                                status = "failed",
-                                message = "An unexpected error occurred",
-                                data = ErrorBody(cause = cause.localizedMessage)
-                            )
-                        )
-
-                        logError(call, cause)
-                    }
-                }
-            }
-        }
-
         swaggerUI(path = "swagger", swaggerFile = "openapi/documentation.yaml")
         openAPI(path = "openapi", swaggerFile = "openapi/documentation.yaml")
 
@@ -80,5 +40,6 @@ fun Application.configureRouting() {
         roomRoutes(RoomServiceImpl(RoomRepositoryImpl()))
         semesterCourseRoutes(SemesterCourseServiceImpl(SemestersCoursesRepositoryImpl()))
         courseProfessorRoutes(CourseProfessorServiceImpl(CourseProfessorRepositoryImpl()))
+        routineGeneratorRoutes()
     }
 }

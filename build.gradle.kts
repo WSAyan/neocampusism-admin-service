@@ -24,9 +24,13 @@ application {
 repositories {
     mavenCentral()
     maven(url = "https://files.basex.org/maven/")
+    flatDir {
+        dirs("libs")
+    }
 }
 
 dependencies {
+    implementation(files("libs/RoutineGeneratorCore-1.0.jar"))
     implementation("io.ktor:ktor-server-core-jvm")
     implementation("io.ktor:ktor-server-auth-jvm")
     implementation("io.ktor:ktor-server-auth-jwt-jvm")

@@ -9,9 +9,11 @@ fun main(args: Array<String>) {
 }
 
 fun Application.module() {
+    configureExceptionHandling()
     configureSecurity()
     configureSerialization()
     configureCors()
     configureRouting()
-    configureDatabases(environment.config)
+    configureMySql(environment.config)
+    configureBaseX(environment.config)
 }
