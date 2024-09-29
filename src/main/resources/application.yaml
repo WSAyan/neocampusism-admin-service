@@ -4,15 +4,18 @@ ktor:
       - com.neocampunism.ApplicationKt.module
   deployment:
     port: 8080
-storage:
-  type: "mysql"
+storageMySql:
   user: "root"
   password: ""
   schema: "nc_admin"
-  host: "db"
-  port: 3306
   driverClassName: "com.mysql.cj.jdbc.Driver"
-  jdbcURL: "jdbc:mysql://"
+  jdbcURL: "jdbc:mysql://db:3306/nc_admin"
+storageBaseX:
+  user: "admin"
+  password: "admin"
+  db: "routine-v0.0.0"
+  host: "localhost"
+  port: 1984
 jwt:
   domain: "https://jwt-provider-domain/"
   audience: "jwt-audience"
