@@ -9,7 +9,7 @@ storageMySql:
   password: ""
   schema: "nc_admin"
   driverClassName: "com.mysql.cj.jdbc.Driver"
-  jdbcURL: "jdbc:mysql://localhost:3306/nc_admin"
+  jdbcURL: "jdbc:mysql://db:3306/nc_admin"
 storageBaseX:
   user: "admin"
   password: "admin"
