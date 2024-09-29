@@ -10,5 +10,9 @@ fun Application.configureCors() {
         allowHeadersPrefixed("X-")
         allowCredentials = true
         allowNonSimpleContentTypes = true
+        allowMethod(HttpMethod.Options)
+        allowMethod(HttpMethod.Put)
+        allowMethod(HttpMethod.Patch)
+        allowMethod(HttpMethod.Delete)
     }
 }
