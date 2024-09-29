@@ -21,6 +21,7 @@ import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.plugins.*
+import io.ktor.server.plugins.cors.routing.*
 import io.ktor.server.plugins.openapi.*
 import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.plugins.swagger.*
@@ -70,7 +71,7 @@ fun Application.configureRouting() {
         }
 
         swaggerUI(path = "swagger", swaggerFile = "openapi/documentation.yaml")
-        openAPI(path="openapi", swaggerFile = "openapi/documentation.yaml")
+        openAPI(path = "openapi", swaggerFile = "openapi/documentation.yaml")
 
         departmentRoutes(DepartmentServiceImpl(DepartmentRepositoryImpl()))
         professorRoutes(ProfessorServiceImpl(ProfessorRepositoryImpl()))

@@ -47,6 +47,8 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-jdbc:$exposed_version")
     implementation("org.jetbrains.exposed:exposed-jodatime:$exposed_version")
 
+    implementation("io.ktor:ktor-server-cors:$ktor_version")
+
     implementation("com.zaxxer:HikariCP:$hikaricp_version")
 
     implementation("org.basex:basex:9.7.4")

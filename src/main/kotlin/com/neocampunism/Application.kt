@@ -1,6 +1,7 @@
 package com.neocampunism
 
 import com.neocampunism.plugins.*
+import configureCors
 import io.ktor.server.application.*
 
 fun main(args: Array<String>) {
@@ -10,6 +11,7 @@ fun main(args: Array<String>) {
 fun Application.module() {
     configureSecurity()
     configureSerialization()
+    configureCors()
     configureRouting()
     configureDatabases(environment.config)
 }
