@@ -7,6 +7,9 @@ fun Application.configureCors() {
         anyHost()
         allowHeader(HttpHeaders.ContentType)
         allowHeader(HttpHeaders.Authorization)
+        allowHeader(HttpHeaders.AccessControlAllowOrigin)
+        allowHeader(HttpHeaders.AccessControlAllowHeaders)
+        allowHeader(HttpHeaders.AccessControlExposeHeaders)
         allowHeadersPrefixed("X-")
         allowCredentials = true
         allowNonSimpleContentTypes = true
