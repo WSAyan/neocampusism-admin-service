@@ -17,6 +17,8 @@ storageBaseX:
   host: "localhost"
   port: 1984
 jwt:
-  domain: "https://jwt-provider-domain/"
-  audience: "jwt-audience"
-  realm: "ktor sample app"
+  secret: "secret"
+  refreshSecret: "refreshSecret"
+  issuer: "http://0.0.0.0:8080/"
+  audience: "http://0.0.0.0:8080/"
+  realm: "admin service"
